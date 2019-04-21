@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:text="返回"
+        android:textSize="15dp"
+        android:background="@drawable/button_ret"
+        android:stateListAnimator="@null"
+        android:id="@+id/BTret"/>
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="历史温度"
+            android:textSize="40dp"
+            android:id="@+id/THTitle"
+            android:layout_gravity="center_horizontal" />
+    
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/Tchart"
+            android:layout_width="380dp"
+            android:layout_height="270dp" />
+
+
+
+
+    </LinearLayout>
+</LinearLayout>
