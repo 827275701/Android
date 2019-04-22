@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.okhttp.Response;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -54,7 +57,7 @@ public class PersonInfo extends Activity {
         //从mainActivity的意图中获取登录的账号
         Intent  i = this.getIntent();
         username = i.getStringExtra("username");
-        System.out.println("--------------" + username);
+        System.out.println("personInfo username--------------" + username);
 
         ret = (Button)findViewById(R.id.Bperson_info_ret);
         Tname = (TextView)findViewById(R.id.Tinfo_name);
@@ -66,7 +69,6 @@ public class PersonInfo extends Activity {
         Tmotto = (TextView)findViewById(R.id.Tinfo_motto);
 
         ret.setOnClickListener(new ButtonClickListener_PersonInfoRet());
-
 
         // 实例化主线程,用于更新接收过来的消息
         mMainHandler = new Handler() {
@@ -86,40 +88,36 @@ public class PersonInfo extends Activity {
             }
         };
 
+        get_person_info();
+    }
 
+    private void get_person_info(){
         //发送HTTP请求去服务其数据库获取用户信息
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    String msg;
-                    //1、连接服务器，并请求对应的资源
+                    //设置POST请求的body
+                    String postBody = "username=" + username;
                     MyHttp myHttp = new MyHttp();
-                    HttpURLConnection conn = myHttp.connect("person_info", username);  //连接服务器
-                    System.out.println(conn);
-                    //2、拿到服务器的回复保存到字符串里
-                    msg = myHttp.get_response();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(msg.getBytes(Charset.forName("utf8"))), Charset.forName("utf8")));;
-
-                    name = br.readLine();
-                    job_number = br.readLine();
-                    sex = br.readLine();
-                    age = br.readLine();
-                    hiredate = br.readLine();
-                    birthday = br.readLine();
-                    motto = br.readLine();
-
-                    // 步骤4:通知主线程,将接收的消息显示到界面
-                    Message msg_ret_to_main = Message.obtain();
-                    msg_ret_to_main.what = 0;
-                    mMainHandler.sendMessage(msg_ret_to_main);
+                    Response response = myHttp.connect("person_info", postBody);
+                    if (response.isSuccessful()) {  //如果返回200 OK
+                        String res_body = response.body().string();
+                        System.out.println("==== personInfo start ====");
+                        System.out.println(res_body);
+                        System.out.println("==== personInfo end ====");
+                    } else {
+                        Looper.prepare();
+                        Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
+                        t.show();
+                        Looper.loop();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
     }
-
 
     //退出时的时间
     private long mExitTime;
@@ -139,14 +137,14 @@ public class PersonInfo extends Activity {
             //创建有一个 Intent对象，并指定启动程序Iret
             Intent Iret = new Intent();  //创建意图
             Iret.setClass(PersonInfo.this, ChooseSpot.class);
+            Iret.putExtra("username", username);
             PersonInfo.this.startActivity(Iret);//启动意图
-            //PersonInfo.this.finish(); //关闭当前Activity
+            PersonInfo.this.finish(); //关闭当前Activity
         } else {
             finish();
             System.exit(0);
         }
     }
-
 
     class ButtonClickListener_PersonInfoRet implements View.OnClickListener {
         @Override
@@ -155,7 +153,7 @@ public class PersonInfo extends Activity {
             Intent Iret = new Intent();  //创建意图
             Iret.setClass(PersonInfo.this, ChooseSpot.class);
             PersonInfo.this.startActivity(Iret);//启动意图
-            //PersonInfo.this.finish(); //关闭当前Activity
+            PersonInfo.this.finish(); //关闭当前Activity
         }
     }
 }

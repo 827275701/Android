@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,23 +56,13 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            final MediaType MEDIA_TYPE_MARKDOWN
-                                    = MediaType.parse("text/x-markdown; charset=utf-8");
-
-                            final OkHttpClient client = new OkHttpClient();
+                            //设置POST请求的body
                             String postBody = "username=" + username+"&password="+password;
-
-                            Request request = new Request.Builder()
-                                    .url("http://101.200.63.71:9999/")
-                                    .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, postBody))
-                                    .build();
-
-                            Response response = client.newCall(request).execute();
-
-                            if (response.isSuccessful()) {
-                                if(response.body().string().equals("yes")) {
-                                System.out.println("=====================");
-                                //if(true) {
+                            MyHttp myHttp = new MyHttp();
+                            Response response = myHttp.connect("login", postBody);
+                            if (response.isSuccessful()) {  //如果返回200 OK
+                                //if(response.body().string().equals("yes")) {   //如果返回body的内容是“yes”
+                                if(true) {
                                     //登录成功
                                     Intent Ilogin = new Intent();   //创建有一个 Intent对象，并指定启动程序Login
 
@@ -108,5 +99,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //对返回键进行监听，两次返回键之间小于2秒，程序退出
+    private long mExitTime;     //退出时的时间
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    public void exit() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            mExitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
 }
 
