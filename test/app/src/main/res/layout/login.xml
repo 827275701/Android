@@ -2,32 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:filterTouchesWhenObscured="true">
+    android:filterTouchesWhenObscured="true"
+    android:background="@drawable/login_background1">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:id="@+id/linearLayout2">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60dp"
+            android:text="欢迎管理员"
+            android:textColor="#eeeeee"
+            android:layout_gravity="center_horizontal" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="40dp"/>
+
 
     </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="欢迎管理员"
-            android:textSize="35dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal" />
 
         <RelativeLayout
         android:layout_width="fill_parent"
@@ -43,35 +46,27 @@
             android:id="@+id/usename_layout"
             android:layout_marginTop="55dp"
             android:gravity="center">
+
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="40dp"
+                android:layout_height="55dp"
                 android:id="@+id/name"
                 android:layout_marginTop="5dp"
-                android:inputType="number"
+                android:inputType="textMultiLine"
                 android:paddingRight="60dp"
                 android:maxLength="20"
-                android:paddingLeft="55dp"/>
+                android:paddingLeft="55dp"
+                android:textColor="#e9e9e9"/>
+
+
             <ImageView
-                android:layout_width="31dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_gravity="left|center_horizontal"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
                 android:src="@drawable/username"
                 android:layout_marginLeft="8dp"
                 android:visibility="visible"/>
-                <TextView
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginTop="4dp"
-                android:gravity="center"
-                android:text="+62"
-                android:textSize="18sp"
-                android:visibility="invisible"/>
-
-
-
 
         </FrameLayout>
         <FrameLayout
@@ -82,6 +77,15 @@
             android:layout_marginTop="6dp"
             android:gravity="center" >
 
+            <ImageView
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/pwd"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
+
             <EditText
                 android:id="@+id/pwd"
                 android:layout_width="fill_parent"
@@ -89,15 +93,9 @@
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:paddingLeft="55dp"
-                android:paddingRight="60dp" />
-
-            <ImageView
-                android:layout_width="31dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                android:layout_gravity="left|center_vertical"
-                android:src="@drawable/pwd"
-                android:layout_marginLeft="8dp" />
+                android:paddingRight="60dp"
+                android:layout_gravity="left|bottom"
+                android:textColor="#eeebeb"/>
 
         </FrameLayout>
 
@@ -107,10 +105,11 @@
             android:layout_height="44dp"
             android:layout_below="@id/usecode_layout"
             android:layout_marginTop="30dp"
-            android:background="#ff336699"
+            android:background="@drawable/button_shap"
             android:textColor="@android:color/white"
             android:gravity="center"
             android:text="登录" />
+
         <Button
             android:id="@+id/login_error"
             android:layout_width="wrap_content"
@@ -119,8 +118,9 @@
             android:layout_below="@id/Blogin"
             android:background="#00000000"
             android:text="忘记密码"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
     </RelativeLayout>
     </LinearLayout>
+
 </RelativeLayout>

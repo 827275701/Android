@@ -25,6 +25,11 @@
         <activity android:name=".HHistory">  </activity>
         <activity android:name=".GHistory">  </activity>
         <activity android:name=".PersonInfo">  </activity>
+        <activity android:name=".AdminMain">  </activity>
+        <activity android:name=".AdminUserManagement">  </activity>
+        <activity android:name=".AdminRoomManagement">  </activity>
+        <activity android:name=".AdminLogManagement">  </activity>
+        <activity android:name=".AdminAddUser">  </activity>
 
     </application>
 

@@ -3,15 +3,18 @@ package com.example.lhwei.test;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.squareup.okhttp.Response;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -23,15 +26,21 @@ import java.util.List;
  */
 public class HHistory extends Activity {
     Button ret;
+
     String where;  //哪里？  大厅？   博览室？
-    String content;  //那一项内容？   温度？  湿度？ 有害气体浓度？
+    String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.t_history);
+        setContentView(R.layout.history);
         ret = (Button) findViewById(R.id.BTret);
         ret.setOnClickListener(new ButtonClickListener());
+
+        Intent i = this.getIntent();//获取当前意图
+        username = i.getStringExtra("username");
+        where = i.getStringExtra("where");
 
         setTitle();//设置标题  xx的室内xx情况
 
@@ -47,12 +56,12 @@ public class HHistory extends Activity {
             //创建有一个 Intent对象，并指定启动程序Iret
             Intent Iret = new Intent();
             Iret.setClass(HHistory.this,NowData.class);
+            Iret.putExtra("username", username);
             Iret.putExtra("where", where);
             HHistory.this.startActivity(Iret);
             HHistory.this.finish();
         }
     }
-
 
     private void showChart() {
         //向LineChart插入数据
@@ -65,7 +74,7 @@ public class HHistory extends Activity {
             yVals1.add(new Entry(i, ys1[i]));
         }
         // 2. 分别通过每一组Entry对象集合的数据创建折线数据集
-        LineDataSet lineDataSet1 = new LineDataSet(yVals1, "最高温度");
+        LineDataSet lineDataSet1 = new LineDataSet(yVals1, "最高湿度");
         // 3. 将每一组折线数据集添加到折线数据中
         LineData lineData = new LineData(lineDataSet1);
         // 4. 将折线数据设置给图表
@@ -76,12 +85,51 @@ public class HHistory extends Activity {
 
         TextView title = (TextView)findViewById(R.id.THTitle);
         Intent  i = this.getIntent();
-
-        where = i.getStringExtra("where");
-        content = i.getStringExtra("content");
-        title.setText(where + "的历史" + content);
+        title.setText(where + "的历史湿度");
     }
 
+    //从服务器获取数据并显示到lineChart上
+    private void showData_H() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    //设置POST请求的body
+                    String postBody = "username=" + username + "&where=" + where + "&data=H";
+                    MyHttp myHttp = new MyHttp();
+                    Response response = myHttp.connect("history", postBody);
+                    if (response.isSuccessful()) {  //如果返回200 OK
+                        String res_body = response.body().string();
+                        System.out.println("==== HHistory start ====");
+                        System.out.println("username--->" + username);
+                        System.out.println("where--->" + where);
+                        System.out.println("==== HHistory start ====");
+                        //此时服务器的数据已经存到了res_body中
+                        System.out.println(res_body);
+                        System.out.println("==== HHistory end ====");
+                    } else {
+                        Looper.prepare();
+                        Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
+                        t.show();
+                        Looper.loop();
+                    }
+                } catch (Exception e) {
+                    //1、提示服务器未运行 2、并返回到ChooseSpot
+                    Looper.prepare();
+                    Toast t = Toast.makeText(getApplicationContext(), "数据不可访问", Toast.LENGTH_SHORT);
+                    t.show();
+                    Looper.loop();
+                    Intent IToInfo = new Intent();  //创建意图, 用于跳转至用户信息界面
+                    IToInfo.putExtra("username", username);
+                    IToInfo.setClass(HHistory.this, ChooseSpot.class);
+                    HHistory.this.startActivity(IToInfo);//启动意图
+                    HHistory.this.finish(); //关闭当前Activity
+                }
+            }
+        }).start();
+
+    }
 
     //对返回键进行监听
     @Override
@@ -91,58 +139,13 @@ public class HHistory extends Activity {
 
             //返回到NowData Activity
             Intent Iret = new Intent();
-            Iret.setClass(HHistory.this,NowData.class);
+            Iret.setClass(HHistory.this, NowData.class);
             Iret.putExtra("where", where);
+            Iret.putExtra("username", username);
             HHistory.this.startActivity(Iret);
             HHistory.this.finish();
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-
-    //从服务器获取数据并显示到lineChart上
-    private void showData_H() {
-
-        new Thread(new Runnable() {
-            //创建有一个 Intent对象，并指定启动程序Login
-            Intent Ilogin = new Intent();
-
-            @Override
-            public void run() {
-                //连接服务器   HTTP协议
-                String urlStr = "http://101.200.63.71:8080/historyData_H";  //服务器地址+端口号+访问程序
-
-                try{
-                    URL url = new URL(urlStr); //创建URL对象
-                    System.out.println("111111111111111111111111");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //获取HttpURLConnection连接（尝试连接服务器）
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(8000);
-                    conn.setReadTimeout(8000);
-                    conn.connect();
-                    System.out.println("222222222222222222222");
-                    System.out.println(conn);
-                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {   //判断 获取到的状态码是不是HTTP_OK， HTTP服务器在连接成功是返回的状态码是200 OK
-                        System.out.println("33333333333333333333");
-                        //获取服务器发送的数据并显示到Activity上
-                    } else{
-//                            Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
-//                            t.show();
-                        System.out.println("4444444444444444444444444444");
-                    }
-
-                    conn.disconnect();//关闭HTTP连接
-                } catch (Exception e) {
-                    //1、提示服务器未运行 2、并返回到ChooseSpot
-
-//                        Toast t = Toast.makeText(getApplicationContext(), "服务器维护中!", Toast.LENGTH_SHORT);
-//                        t.show();
-                    e.printStackTrace();
-                    System.out.println("5555555555555555555555555");
-                }
-            }
-        }).start();
-
     }
 }

@@ -104,6 +104,7 @@ public class PersonInfo extends Activity {
                     if (response.isSuccessful()) {  //如果返回200 OK
                         String res_body = response.body().string();
                         System.out.println("==== personInfo start ====");
+                        System.out.println("username--->" + username);
                         System.out.println(res_body);
                         System.out.println("==== personInfo end ====");
                     } else {
@@ -152,6 +153,7 @@ public class PersonInfo extends Activity {
             //创建有一个 Intent对象，并指定启动程序Iret
             Intent Iret = new Intent();  //创建意图
             Iret.setClass(PersonInfo.this, ChooseSpot.class);
+            Iret.putExtra("username", username);
             PersonInfo.this.startActivity(Iret);//启动意图
             PersonInfo.this.finish(); //关闭当前Activity
         }

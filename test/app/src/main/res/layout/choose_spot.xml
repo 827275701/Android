@@ -3,79 +3,76 @@
     android:id="@+id/main_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:background="@drawable/background6">
 
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <Space
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="45dp" />
+            android:layout_height="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="请选择博览室"
-            android:textSize="45dp" />
+            android:textSize="40dp"
+            android:textColor="@android:color/white"/>
 
-        <TextView
+        <Space
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="20dp" />
-
+            android:layout_height="38dp" />
         <Button
             android:id="@+id/Broom1"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:background="#ff336699"
+            android:textColor="@android:color/white"
             android:text="博览室1"
             android:textSize="25dp" />
 
-        <TextView
+        <Space
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="10dp" />
+            android:layout_height="38dp" />
 
         <Button
             android:id="@+id/Broom2"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:background="#ff336699"
+            android:textColor="@android:color/white"
             android:text="博览室2"
             android:textSize="25dp" />
 
-        <TextView
+        <Space
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="10dp" />
+            android:layout_height="38dp" />
 
         <Button
             android:id="@+id/Broom3"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:background="#ff336699"
+            android:textColor="@android:color/white"
             android:text="博览室3"
             android:textSize="25dp" />
 
-        <TextView
+        <Space
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="10dp" />
-
+            android:layout_height="38dp" />
         <Button
             android:id="@+id/Broom4"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:background="#ff336699"
             android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/white"
             android:text="博览室4"
             android:textSize="25dp" />
 
@@ -126,9 +123,7 @@
 
         </LinearLayout>
 
-
     </RelativeLayout>
-
 
 </android.support.v4.widget.DrawerLayout>
 

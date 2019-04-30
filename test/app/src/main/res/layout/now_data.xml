@@ -2,16 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/background6">
 
-    <Button
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:textSize="17dp"
-        android:text="返回"
-        android:background="@drawable/button_ret"
-        android:stateListAnimator="@null"
-        android:id="@+id/Bret1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,9 +13,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:text=""
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="50dp"/>
 
 
         <TextView
@@ -31,20 +22,27 @@
             android:text="当前室内状态"
             android:textSize="40dp"
             android:layout_gravity="center_horizontal"
-            android:id="@+id/Ttitle"/>
+            android:id="@+id/Ttitle"
+            android:textColor="@android:color/white"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/wendu"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="温度"
-                android:textSize="25dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -64,17 +62,23 @@
                 android:id="@+id/Bt_history"/>
         </LinearLayout>
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="38dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="湿度"
-                android:textSize="25dp"/>
-
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/shidu"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,19 +94,27 @@
 
         </LinearLayout>
 
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="38dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:baselineAligned="false">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/kulou"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="有害气体浓度"
-                android:textSize="15dp" />
-
-            <TextView
-                android:layout_width="124dp"
                 android:layout_height="wrap_content"
                 android:ems="4"
                 android:textSize="35dp"/>

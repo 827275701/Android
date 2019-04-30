@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="欢迎admin"
+        android:textSize="35dp"
+        android:layout_gravity="center_horizontal" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <Button
+        android:id="@+id/Badmin_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户管理"
+        android:layout_gravity="center_horizontal" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <Button
+        android:id="@+id/Badmin_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="博览室管理"
+        android:layout_gravity="center_horizontal" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp" />
+
+    <Button
+        android:id="@+id/Badmin_log"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="查看日志"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>

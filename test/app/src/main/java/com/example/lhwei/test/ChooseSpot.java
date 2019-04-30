@@ -62,7 +62,6 @@ public class ChooseSpot extends Activity {
         //从mainActivity的意图中获取登录的账号
         Intent  i = this.getIntent();
         username = i.getStringExtra("username");
-        System.out.println("chooserSpot username--------------" + username);
 
         getPersonInfo();
     }
@@ -79,7 +78,7 @@ public class ChooseSpot extends Activity {
             Iret.putExtra("where", where);
             Iret.putExtra("username", username);
             ChooseSpot.this.startActivity(Iret);//启动意图
-            //ChooseSpot.this.finish(); //关闭当前Activity
+            ChooseSpot.this.finish(); //关闭当前Activity
         }
     }
 
@@ -94,11 +93,11 @@ public class ChooseSpot extends Activity {
             Iret.putExtra("where", where);
             Iret.putExtra("username", username);
             ChooseSpot.this.startActivity(Iret);//启动意图
-            //ChooseSpot.this.finish(); //关闭当前Activity
+            ChooseSpot.this.finish(); //关闭当前Activity
         }
     }
 
-    //个人信息
+    //个人信息按钮监听函数
     class ButtonClickListener_PersonInfo implements View.OnClickListener {
         String msg;
         @Override
@@ -110,7 +109,6 @@ public class ChooseSpot extends Activity {
             ChooseSpot.this.finish(); //关闭当前Activity
         }
     }
-
 
     private void getPersonInfo() {
         //发送HTTP请求去服务其数据库获取用户信息
@@ -125,6 +123,7 @@ public class ChooseSpot extends Activity {
                     if (response.isSuccessful()) {  //如果返回200 OK
                         String res_body = response.body().string();
                         System.out.println("==== chooseSpot start ====");
+                        System.out.println("username--->" + username);
                         System.out.println(res_body);
                         System.out.println("==== chooseSpot end ====");
                     } else {
@@ -161,7 +160,7 @@ public class ChooseSpot extends Activity {
         }
     }
 
-    //退出登录
+    //退出登录安按钮监听
     class ButtonClickListener_ExitLogin implements View.OnClickListener {
         @Override
         public void onClick(View v) {

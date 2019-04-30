@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="添加管理员"
+        android:textSize="35dp"
+        android:layout_gravity="center_horizontal" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓    名"
+            android:textSize="25dp"/>
+
+        <EditText
+            android:id="@+id/Tadmin_adduser_name"
+            android:layout_width="200dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="工    号"
+            android:textSize="25dp"/>
+
+        <EditText
+            android:id="@+id/Tadmin_adduser_no"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性    别"
+            android:textSize="25dp"/>
+
+        <EditText
+            android:id="@+id/Tadmin_adduser_sex"
+            android:layout_width="200dp"
+            android:layout_height="45dp" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:textSize="25dp"/>
+
+        <EditText
+            android:id="@+id/Tadmin_adduser_phone"
+            android:layout_width="200dp"
+            android:layout_height="45dp"
+            android:inputType="phone"/>
+    </LinearLayout>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:id="@+id/Badmin_adduser_submit"
+        android:layout_width="280dp"
+        android:layout_height="38dp"
+        android:text="提  交"
+        android:textSize="20dp"
+        android:textColor="@android:color/white"
+        android:layout_gravity="center_horizontal"
+        android:background="#ff336699"/>
+
+
+
+
+
+</LinearLayout>

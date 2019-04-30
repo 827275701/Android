@@ -1,6 +1,5 @@
 package com.example.lhwei.test;
 
-import android.app.VoiceInteractor;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-
-import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -61,15 +54,21 @@ public class MainActivity extends AppCompatActivity {
                             MyHttp myHttp = new MyHttp();
                             Response response = myHttp.connect("login", postBody);
                             if (response.isSuccessful()) {  //如果返回200 OK
-                                //if(response.body().string().equals("yes")) {   //如果返回body的内容是“yes”
-                                if(true) {
+                                if(response.body().string().equals("yes")) {   //如果返回body的内容是“yes”
+                                //if(true) {
                                     //登录成功
                                     Intent Ilogin = new Intent();   //创建有一个 Intent对象，并指定启动程序Login
 
-                                    Ilogin.setClass(MainActivity.this, ChooseSpot.class);
-                                    Ilogin.putExtra("username", username);
-                                    MainActivity.this.startActivity(Ilogin); //启动意图
-                                    MainActivity.this.finish();  //关闭MainActivity
+                                    if(username.equals("admin")) {
+                                        Ilogin.setClass(MainActivity.this, AdminMain.class);
+                                        MainActivity.this.startActivity(Ilogin); //启动意图
+                                        MainActivity.this.finish();  //关闭MainActivity
+                                    } else {
+                                        Ilogin.setClass(MainActivity.this, ChooseSpot.class);
+                                        Ilogin.putExtra("username", username);
+                                        MainActivity.this.startActivity(Ilogin); //启动意图
+                                        MainActivity.this.finish();  //关闭MainActivity
+                                    }
                                 } else {
                                     //登录失败
                                     Looper.prepare();

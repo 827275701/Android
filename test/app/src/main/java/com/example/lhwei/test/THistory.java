@@ -4,24 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.DropBoxManager;
+import android.os.Looper;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.squareup.okhttp.Response;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-
 
 /**
  * Created by lhwei on 2019/1/21.
@@ -29,14 +30,17 @@ import java.util.List;
 public class THistory extends Activity {
     Button ret;
     String where;  //哪里？  大厅？   博览室？
-    String content;  //那一项内容？   温度？  湿度？ 有害气体浓度？
-
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.t_history);
+        setContentView(R.layout.history);
         ret = (Button) findViewById(R.id.BTret);
         ret.setOnClickListener(new ButtonClickListener());
+
+        Intent i = this.getIntent();//获取当前意图
+        username = i.getStringExtra("username");
+        where = i.getStringExtra("where");
 
         setTitle();//设置标题  xx的室内xx情况
 
@@ -52,6 +56,7 @@ public class THistory extends Activity {
             //创建有一个 Intent对象，并指定启动程序Iret
             Intent Iret = new Intent();
             Iret.setClass(THistory.this, NowData.class);
+            Iret.putExtra("username", username);
             Iret.putExtra("where", where);
             THistory.this.startActivity(Iret);
             THistory.this.finish();
@@ -79,9 +84,7 @@ public class THistory extends Activity {
     private void setTitle() {
         TextView title = (TextView)findViewById(R.id.THTitle);
         Intent  i = this.getIntent();
-        where = i.getStringExtra("where");
-        content = i.getStringExtra("content");
-        title.setText(where + "的历史" + content);
+        title.setText(where + "的历史温度");
     }
 
     //对返回键进行监听
@@ -93,6 +96,7 @@ public class THistory extends Activity {
             //返回到NowData Activity
             Intent Iret = new Intent();
             Iret.setClass(THistory.this,NowData.class);
+            Iret.putExtra("username", username);
             Iret.putExtra("where", where);
             THistory.this.startActivity(Iret);
             THistory.this.finish();
@@ -106,41 +110,38 @@ public class THistory extends Activity {
     private void showData_T() {
 
         new Thread(new Runnable() {
-            //创建有一个 Intent对象，并指定启动程序Login
-            Intent Ilogin = new Intent();
-
             @Override
             public void run() {
-                //连接服务器   HTTP协议
-                String urlStr = "http://101.200.63.71:8080/historyData_T";  //服务器地址+端口号+访问程序
-
                 try{
-                    URL url = new URL(urlStr); //创建URL对象
-                    System.out.println("111111111111111111111111");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection(); //获取HttpURLConnection连接（尝试连接服务器）
-                    conn.setRequestMethod("GET");
-                    conn.setConnectTimeout(8000);
-                    conn.setReadTimeout(8000);
-                    conn.connect();
-                    System.out.println("222222222222222222222");
-                    System.out.println(conn);
-                    if(conn.getResponseCode() == HttpURLConnection.HTTP_OK) {   //判断 获取到的状态码是不是HTTP_OK， HTTP服务器在连接成功是返回的状态码是200 OK
-                        System.out.println("33333333333333333333");
-                        //获取服务器发送的数据并显示到Activity上
-                    } else{
-//                            Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
-//                            t.show();
-                        System.out.println("4444444444444444444444444444");
+                    //设置POST请求的body
+                    String postBody = "username=" + username + "&where=" + where + "&data=T";
+                    MyHttp myHttp = new MyHttp();
+                    Response response = myHttp.connect("history", postBody);
+                    if (response.isSuccessful()) {  //如果返回200 OK
+                        String res_body = response.body().string();
+                        System.out.println("==== THistory start ====");
+                        //此时服务器的数据已经存到了res_body中
+                        System.out.println("username--->" + username);
+                        System.out.println("where--->" + where);
+                        System.out.println(res_body);
+                        System.out.println("==== THistory end ====");
+                    } else {
+                        Looper.prepare();
+                        Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
+                        t.show();
+                        Looper.loop();
                     }
-
-                    conn.disconnect();//关闭HTTP连接
                 } catch (Exception e) {
                     //1、提示服务器未运行 2、并返回到ChooseSpot
-
-//                        Toast t = Toast.makeText(getApplicationContext(), "服务器维护中!", Toast.LENGTH_SHORT);
-//                        t.show();
-                    e.printStackTrace();
-                    System.out.println("5555555555555555555555555");
+                    Looper.prepare();
+                    Toast t = Toast.makeText(getApplicationContext(), "数据不可访问", Toast.LENGTH_SHORT);
+                    t.show();
+                    Looper.loop();
+                    Intent IToInfo = new Intent();  //创建意图, 用于跳转至用户信息界面
+                    IToInfo.putExtra("username", username);
+                    IToInfo.setClass(THistory.this, ChooseSpot.class);
+                    THistory.this.startActivity(IToInfo);//启动意图
+                    THistory.this.finish(); //关闭当前Activity
                 }
             }
         }).start();
