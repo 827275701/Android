@@ -24,10 +24,7 @@ import java.nio.charset.Charset;
 /**
  * Created by lhwei on 2019/1/17.
  */
-public class ChooseSpot extends Activity {
-    Button room1;
-    Button room2;
-
+public class TestChooseSpot extends Activity {
     //左边拓展框内容
     Button exitLogin;   //退出登录
     Button personInfo;  //个人信息
@@ -47,10 +44,8 @@ public class ChooseSpot extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose_spot);
+        setContentView(R.layout.test_choose_spot);
 
-        room1 = (Button)findViewById(R.id.Broom1);
-        room2 = (Button)findViewById(R.id.Broom2);
         exitLogin = (Button)findViewById(R.id.Bexit_login);
         personInfo = (Button)findViewById(R.id.Bperson_info);
         chang_epassword = (Button)findViewById(R.id.Bchange_password);
@@ -58,8 +53,6 @@ public class ChooseSpot extends Activity {
         tv_name = (TextView)findViewById(R.id.Tname);
         tv_no = (TextView)findViewById(R.id.Tno);
 
-        room1.setOnClickListener(new ButtonClickListener1());   //博览室1按键监听
-        room2.setOnClickListener(new ButtonClickListener2());   //博览室2按键监听
         exitLogin.setOnClickListener(new ButtonClickListener_ExitLogin());   //退出按键监听
         personInfo.setOnClickListener(new ButtonClickListener_PersonInfo());   //个人信息按键监听
         chang_epassword.setOnClickListener(new ButtonClickListener_ChangePassword());
@@ -68,36 +61,9 @@ public class ChooseSpot extends Activity {
         Intent  i = this.getIntent();
         username = i.getStringExtra("username");
 
-        getPersonInfo();
-    }
+        //getPersonInfo();
 
-    class ButtonClickListener1 implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            where = room1.getText().toString(); //获取Button上的信息传递给下一个界面标题处的TestView
-            //创建有一个 Intent对象，并指定启动程序Iret
-            Intent Iret = new Intent();  //创建意图
-            Iret.setClass(ChooseSpot.this, NowData.class);
-            Iret.putExtra("where", where);
-            Iret.putExtra("username", username);
-            ChooseSpot.this.startActivity(Iret);//启动意图
-            ChooseSpot.this.finish(); //关闭当前Activity
-        }
-    }
 
-    class ButtonClickListener2 implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            where = room2.getText().toString(); //获取Button上的信息传递给下一个界面标题处的TestView
-
-            //创建有一个 Intent对象，并指定启动程序Iret
-            Intent Iret = new Intent();  //创建意图
-            Iret.setClass(ChooseSpot.this, NowData.class);
-            Iret.putExtra("where", where);
-            Iret.putExtra("username", username);
-            ChooseSpot.this.startActivity(Iret);//启动意图
-            ChooseSpot.this.finish(); //关闭当前Activity
-        }
     }
 
     //个人信息按钮监听函数
@@ -106,9 +72,9 @@ public class ChooseSpot extends Activity {
         public void onClick(View v) {
             Intent IToInfo = new Intent();  //创建意图, 用于跳转至用户信息界面
             IToInfo.putExtra("username", username);
-            IToInfo.setClass(ChooseSpot.this, PersonInfo.class);
-            ChooseSpot.this.startActivity(IToInfo);//启动意图
-            ChooseSpot.this.finish(); //关闭当前Activity
+            IToInfo.setClass(TestChooseSpot.this, PersonInfo.class);
+            TestChooseSpot.this.startActivity(IToInfo);//启动意图
+            TestChooseSpot.this.finish(); //关闭当前Activity
         }
     }
 
@@ -117,9 +83,9 @@ public class ChooseSpot extends Activity {
         public void onClick(View v) {
             Intent IToInfo = new Intent();  //创建意图, 用于跳转至用户信息界面
             IToInfo.putExtra("username", username);
-            IToInfo.setClass(ChooseSpot.this, ChangePassword.class);
-            ChooseSpot.this.startActivity(IToInfo);//启动意图
-            ChooseSpot.this.finish(); //关闭当前Activity
+            IToInfo.setClass(TestChooseSpot.this, ChangePassword.class);
+            TestChooseSpot.this.startActivity(IToInfo);//启动意图
+            TestChooseSpot.this.finish(); //关闭当前Activity
         }
     }
 
@@ -177,7 +143,7 @@ public class ChooseSpot extends Activity {
     }
     public void exit() {
         if ((System.currentTimeMillis() - mExitTime) > 2000) {
-            Toast.makeText(ChooseSpot.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TestChooseSpot.this, "再按一次退出", Toast.LENGTH_SHORT).show();
             mExitTime = System.currentTimeMillis();
         } else {
             finish();
@@ -191,9 +157,9 @@ public class ChooseSpot extends Activity {
         public void onClick(View v) {
             //创建有一个 Intent对象，并指定启动程序Iret
             Intent Iret = new Intent();  //创建意图
-            Iret.setClass(ChooseSpot.this, MainActivity.class);
-            ChooseSpot.this.startActivity(Iret);//启动意图
-            ChooseSpot.this.finish(); //关闭当前Activity
+            Iret.setClass(TestChooseSpot.this, MainActivity.class);
+            TestChooseSpot.this.startActivity(Iret);//启动意图
+            TestChooseSpot.this.finish(); //关闭当前Activity
         }
     }
 }

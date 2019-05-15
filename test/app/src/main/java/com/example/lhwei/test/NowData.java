@@ -34,6 +34,9 @@ public class NowData extends Activity {
     String where = null;  //哪里？  大厅？   博览室？
     String username = null;
 
+    TextView now_t;
+    TextView now_h;
+    TextView now_g;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,9 @@ public class NowData extends Activity {
         t_history = (Button)findViewById(R.id.Bt_history);
         h_history = (Button)findViewById(R.id.Bh_history);
         g_history = (Button)findViewById(R.id.Bg_history);
+        now_t = (TextView)findViewById(R.id.Tnow_t);
+        now_h = (TextView)findViewById(R.id.Tnow_h);
+        now_g = (TextView)findViewById(R.id.Tnow_g);
 
         t_history.setOnClickListener(new ButtonClickListener_T());  //温度按钮监听
         h_history.setOnClickListener(new ButtonClickListener_H());  //湿度按钮监听
@@ -55,8 +61,6 @@ public class NowData extends Activity {
         title.setText(where + "当前状态"); //获取意图内容并设置标题
 
         showData();
-
-
 
         // =============================== 通知栏显示代码==============================
         //创建通知栏管理工具
@@ -154,12 +158,23 @@ public class NowData extends Activity {
                     MyHttp myHttp = new MyHttp();
                     Response response = myHttp.connect("now_data", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
-                        String res_body = response.body().string();
+                        final String res_body = response.body().string();
+
                         System.out.println("==== nowData start ====");
                         System.out.println(username);
                         System.out.println(res_body);
 
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //更新UI
+                                String[] buff = res_body.split("[&]");
+                                now_t.setText(buff[0].split("[=]")[1]);
+                                now_h.setText(buff[1].split("[=]")[1]);
+                                now_g.setText(buff[2].split("[=]")[1]);
+                            }
 
+                        });
 
                         System.out.println("==== nowData end ====");
                     } else {

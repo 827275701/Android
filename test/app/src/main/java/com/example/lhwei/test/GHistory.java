@@ -2,8 +2,11 @@ package com.example.lhwei.test;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -11,9 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.squareup.okhttp.Response;
 
 import java.net.HttpURLConnection;
@@ -25,43 +32,108 @@ import java.util.List;
  * Created by lhwei on 2019/1/22.
  */
 public class GHistory extends Activity {
-    Button ret;
     String where;  //哪里？  大厅？   博览室？
     String username;
+    LineChart lc;
+
+    //float[] ys1;
+    float[] history_data_day = new float[24];
+    float[] history_data_week = new float[12];
+    float[] history_data_month = new float[30];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
-        ret = (Button) findViewById(R.id.BTret);
-        ret.setOnClickListener(new ButtonClickListener());
+
+        lc = (LineChart) findViewById(R.id.Tchart);
 
         Intent i = this.getIntent();//获取当前意图
         username = i.getStringExtra("username");
         where = i.getStringExtra("where");
 
         setTitle();//设置标题  xx的室内xx情况
-        showChart();  //显示LineChart
-        showData_G();
+        showChart(history_data_day);
+        showData_G();   //获取并显示数据
+
+
+        /***
+         * Handler分发Message对象的方式
+         */
+
+
     }
 
-    //显示图表
-    private void showChart() {
-        //向LineChart插入数据
-        LineChart lc = (LineChart) findViewById(R.id.Tchart);
+    private void setXAxis() {
+        // X轴
+        XAxis xAxis = lc.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); // 在底部
+        xAxis.setDrawGridLines(false); // 不绘制网格线
+        xAxis.setLabelCount(20); // 设置标签数量
+        xAxis.setTextColor(Color.WHITE); // 文本颜色为灰色
+        xAxis.setTextSize(12f); // 文本大小为12dp
+        xAxis.setGranularity(3f); // 设置间隔尺寸
+        xAxis.setAxisMinimum(0f); // 设置X轴最小值
+        xAxis.setAxisMaximum(24f); // 设置X轴最大值
+        // 设置标签的显示格式
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return value == 0 ? "℃" : value == 63 ? "(S)" : value < 10 ? "0" + (int) value : (int) value + "";
+            }
+        });
+    }
+
+    private void setYAxis() {
+        // 左边Y轴
+        final YAxis yAxisLeft = lc.getAxisLeft();
+        yAxisLeft.setAxisMaximum(40); // 设置Y轴最大值
+        yAxisLeft.setAxisMinimum(-10); // 设置Y轴最小值
+        yAxisLeft.setGranularity(2f); // 设置间隔尺寸
+        yAxisLeft.setTextSize(12f); // 文本大小为12dp
+        yAxisLeft.setTextColor(Color.WHITE); // 文本颜色为灰色
+        yAxisLeft.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return value == yAxisLeft.getAxisMinimum() ? (int) value + "" : (int) value +"";
+            }
+        });
+        // 右侧Y轴
+        lc.getAxisRight().setEnabled(false); // 不启用
+    }
+
+    public void setChartData(float[] history_data) {
         // 1. 获取一或多组Entry对象集合的数据
         // 模拟数据1
         List<Entry> yVals1 = new ArrayList<>();
-        float[] ys1 = new float[]{22f, 24f, 25f, 25f, 25f, 22f};
-        for (int i = 0; i < ys1.length; i++) {
-            yVals1.add(new Entry(i, ys1[i]));
+        for (int i = 0; i < history_data.length; i++) {
+            yVals1.add(new Entry(i, history_data[i]));
         }
         // 2. 分别通过每一组Entry对象集合的数据创建折线数据集
         LineDataSet lineDataSet1 = new LineDataSet(yVals1, "最高有害气体浓度");
-        // 3. 将每一组折线数据集添加到折线数据中
+        //lineDataSet1.setColor(Color.GREEN); // 设置折线为红色
+        lineDataSet1.setDrawCircles(true);//在点上画圆 默认true
+        //lineDataSet1.setDrawCircleHole(false); // 不绘制圆洞，即为实心圆点
+        lineDataSet1.setHighLightColor(Color.GREEN); // 设置点击某个点时，横竖两条线的颜色
+        lineDataSet1.setMode(LineDataSet.Mode.CUBIC_BEZIER); // 设置为贝塞尔曲线
+        lineDataSet1.setCubicIntensity(0.15f); // 强度
+        lineDataSet1.setCircleColor(Color.WHITE); // 设置圆点为颜色
+        lineDataSet1.setCircleRadius(5f);
+        lineDataSet1.setLineWidth(1f); // 设置线宽为2
+
+        // 3.将每一组折线数据集添加到折线数据中
         LineData lineData = new LineData(lineDataSet1);
-        // 4. 将折线数据设置给图表
+        lineData.setDrawValues(false);
+        // 4.将折线数据设置给图表
         lc.setData(lineData);
+    }
+
+    //显示图表
+    private void showChart(float[] history_data) {
+        //向LineChart插入数据
+        setXAxis();
+        setYAxis();
+        setChartData(history_data);
     }
 
     //设置标题
@@ -71,16 +143,16 @@ public class GHistory extends Activity {
         title.setText(where + "的历史有害气体浓度");
     }
 
-
-
+    //从服务器获取有害气体浓度的数据，并显示到UI，制作图标
     private void showData_G() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
+
                     //设置POST请求的body
-                    String postBody = "username=" + username + "&where=" + where + "data=G";
+                    String postBody = "username=" + username + "&where=" + where + "&data=G";
                     MyHttp myHttp = new MyHttp();
                     Response response = myHttp.connect("history", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
@@ -90,6 +162,32 @@ public class GHistory extends Activity {
                         System.out.println("username--->" + username);
                         System.out.println("where--->" + where);
                         System.out.println(res_body);
+
+                        String data = res_body.split("[=]")[1];
+                        System.out.println("data ===>" + data);
+
+                        String[] buff = data.split("[&]");
+
+                        //String[] buff = res_body.split("[&]");
+                        //走到这里， Android已经拿到了历史数据，并把每一条都保存到了buff中
+                        //接下来要保存到history_data_xxx中，使其绘制成图表，并显示
+                        for(int i = 0; i<buff.length; ++i) {
+                            history_data_day[i] = Float.parseFloat(buff[i]);
+                        }
+
+                        for(int i = 0; i<history_data_day.length; ++i) {
+                            System.out.println(history_data_day[i]);
+                        }
+
+                        //启动UI线程
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //要显示的数据已经保存到了 history_data_xxx中，接下来更新UI
+                                showChart(history_data_day);  //显示LineChart
+                            }
+                        });
+
                         System.out.println("==== GHistory end ====");
                     } else {
                         Looper.prepare();
@@ -97,6 +195,8 @@ public class GHistory extends Activity {
                         t.show();
                         Looper.loop();
                     }
+
+
                 } catch (Exception e) {
                     //1、提示服务器未运行 2、并返回到ChooseSpot
                     Looper.prepare();
@@ -132,17 +232,4 @@ public class GHistory extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-    //返回键的监听函数
-    class ButtonClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            //创建有一个 Intent对象，并指定启动程序Iret
-            Intent Iret = new Intent();
-            Iret.setClass(GHistory.this, NowData.class);
-            Iret.putExtra("username", username);
-            Iret.putExtra("where", where);
-            GHistory.this.startActivity(Iret);
-            GHistory.this.finish();
-        }
-    }
 }

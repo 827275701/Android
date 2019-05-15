@@ -24,6 +24,8 @@ public class AdminUserManagement extends AppCompatActivity {
         select_user = (Button) findViewById(R.id.Badmin_select_user);
 
         add_user.setOnClickListener(new ButtonClickListener_add_user());   //添加用户按键监听
+        delete_user.setOnClickListener(new ButtonClickListener_delete_user());   //添加用户按键监听
+        select_user.setOnClickListener(new ButtonClickListener_select_user());   //添加用户按键监听
 
     }
 
@@ -38,6 +40,27 @@ public class AdminUserManagement extends AppCompatActivity {
         }
     }
 
+    class ButtonClickListener_delete_user implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            //创建有一个 Intent对象，并指定启动程序Iret
+            Intent Iret = new Intent();  //创建意图
+            Iret.setClass(AdminUserManagement.this, AdminDeleteUser.class);
+            AdminUserManagement.this.startActivity(Iret);//启动意图
+            AdminUserManagement.this.finish(); //关闭当前Activity
+        }
+    }
+
+    class ButtonClickListener_select_user implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            //创建有一个 Intent对象，并指定启动程序Iret
+            Intent Iret = new Intent();  //创建意图
+            Iret.setClass(AdminUserManagement.this, AdminSelectUser.class);
+            AdminUserManagement.this.startActivity(Iret);//启动意图
+            AdminUserManagement.this.finish(); //关闭当前Activity
+        }
+    }
 
     //对返回键进行监听
     @Override

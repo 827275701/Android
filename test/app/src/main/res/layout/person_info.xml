@@ -19,16 +19,16 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="80dp" />
+        android:layout_height="70dp" />
     
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -36,8 +36,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="姓        名 "
-                android:textColor="#ffffff"/>
+                android:text="          姓  名"
+                android:textColor="#ffffff"
+                android:layout_gravity="left|center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,129 +46,91 @@
                 android:textSize="30dp"
                 android:text="null"
                 android:id="@+id/Tinfo_name"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+        
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="          工  号"
                 android:textColor="#ffffff"/>
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="null"
+                android:id="@+id/Tinfo_job_number"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        </FrameLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="工        号" />
+                android:textSize="30dp"
+                android:text="          性  别"
+                android:textColor="#ffffff"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="30dp"
                 android:text="null"
-                android:id="@+id/Tinfo_job_number"/>
+                android:id="@+id/Tinfo_sex"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
 
-        </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="年        龄" />
+                android:textSize="30dp"
+                android:text="          手  机"
+                android:textColor="#ffffff"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="30dp"
                 android:text="null"
-                android:id="@+id/Tinfo_age"/>
+                android:id="@+id/Tphone"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="性        别" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="null"
-                android:id="@+id/Tinfo_sex"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="入职日期  " />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="null"
-                android:id="@+id/Tinfo_hiredate"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="生        日" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="null"
-                android:id="@+id/Tinfo_birthday"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="85dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="座  右  铭" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="null"
-                android:id="@+id/Tinfo_motto"/>
-
-        </LinearLayout>
+        </FrameLayout>
     </LinearLayout>
 
 </LinearLayout>

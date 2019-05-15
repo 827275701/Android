@@ -25,14 +25,13 @@ import java.nio.charset.Charset;
  * Created by lhwei on 2019/2/1.
  */
 public class PersonInfo extends Activity {
-    Button ret;
     TextView Tname;
     TextView Tjob_number;
     TextView Tsex;
     TextView Tage;
     TextView Thiredate;
     TextView Tbirthday;
-    TextView Tmotto;
+    TextView Tphone;
 
     String username = null;
 
@@ -42,7 +41,7 @@ public class PersonInfo extends Activity {
     String age = null;   //年龄
     String hiredate = null;  //入职时间
     String birthday = null; //生日
-    String motto = null; //座右铭
+    String phone = null; //座右铭
 
     // 主线程Handler
     // 用于将从服务器获取的消息显示出来
@@ -59,34 +58,14 @@ public class PersonInfo extends Activity {
         username = i.getStringExtra("username");
         System.out.println("personInfo username--------------" + username);
 
-        ret = (Button)findViewById(R.id.Bperson_info_ret);
+        //ret = (Button)findViewById(R.id.Bperson_info_ret);
         Tname = (TextView)findViewById(R.id.Tinfo_name);
         Tjob_number = (TextView)findViewById(R.id.Tinfo_job_number);
         Tsex = (TextView)findViewById(R.id.Tinfo_sex);
-        Tage = (TextView)findViewById(R.id.Tinfo_age);
-        Thiredate = (TextView)findViewById(R.id.Tinfo_hiredate);
-        Tbirthday = (TextView)findViewById(R.id.Tinfo_birthday);
-        Tmotto = (TextView)findViewById(R.id.Tinfo_motto);
-
-        ret.setOnClickListener(new ButtonClickListener_PersonInfoRet());
-
-        // 实例化主线程,用于更新接收过来的消息
-        mMainHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 0:
-                        Tname.setText(name);
-                        Tjob_number.setText(job_number);
-                        Tsex.setText(sex);
-                        Tage.setText(age);
-                        Thiredate.setText(hiredate);
-                        Tbirthday.setText(birthday);
-                        Tmotto.setText(motto);
-                        break;
-                }
-            }
-        };
+        //Tage = (TextView)findViewById(R.id.Tinfo_age);
+        //Thiredate = (TextView)findViewById(R.id.Tinfo_hiredate);
+        //Tbirthday = (TextView)findViewById(R.id.Tinfo_birthday);
+        Tphone = (TextView)findViewById(R.id.Tphone);
 
         get_person_info();
     }
@@ -102,10 +81,24 @@ public class PersonInfo extends Activity {
                     MyHttp myHttp = new MyHttp();
                     Response response = myHttp.connect("person_info", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
-                        String res_body = response.body().string();
+                        final String res_body = response.body().string();
                         System.out.println("==== personInfo start ====");
                         System.out.println("username--->" + username);
                         System.out.println(res_body);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //更新UI
+                                String[] buff = res_body.split("[&]");
+                                Tname.setText(buff[0].split("[=]")[1]);
+                                Tjob_number.setText(buff[1].split("[=]")[1]);
+                                Tsex.setText(buff[2].split("[=]")[1]);
+                                Tphone.setText(buff[3].split("[=]")[1]);
+                            }
+
+                        });
+
                         System.out.println("==== personInfo end ====");
                     } else {
                         Looper.prepare();
@@ -147,15 +140,4 @@ public class PersonInfo extends Activity {
         }
     }
 
-    class ButtonClickListener_PersonInfoRet implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            //创建有一个 Intent对象，并指定启动程序Iret
-            Intent Iret = new Intent();  //创建意图
-            Iret.setClass(PersonInfo.this, ChooseSpot.class);
-            Iret.putExtra("username", username);
-            PersonInfo.this.startActivity(Iret);//启动意图
-            PersonInfo.this.finish(); //关闭当前Activity
-        }
-    }
 }

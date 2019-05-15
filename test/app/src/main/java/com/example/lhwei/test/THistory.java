@@ -28,15 +28,12 @@ import java.util.List;
  * Created by lhwei on 2019/1/21.
  */
 public class THistory extends Activity {
-    Button ret;
     String where;  //哪里？  大厅？   博览室？
     String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history);
-        ret = (Button) findViewById(R.id.BTret);
-        ret.setOnClickListener(new ButtonClickListener());
 
         Intent i = this.getIntent();//获取当前意图
         username = i.getStringExtra("username");
@@ -49,19 +46,6 @@ public class THistory extends Activity {
         showData_T();
     }
 
-    //返回键的监听函数
-    class ButtonClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            //创建有一个 Intent对象，并指定启动程序Iret
-            Intent Iret = new Intent();
-            Iret.setClass(THistory.this, NowData.class);
-            Iret.putExtra("username", username);
-            Iret.putExtra("where", where);
-            THistory.this.startActivity(Iret);
-            THistory.this.finish();
-        }
-    }
 
     private void showChart() {
         //向LineChart插入数据

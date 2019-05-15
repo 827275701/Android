@@ -25,13 +25,14 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="60dp" />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/Tchart"
             android:layout_width="380dp"
             android:layout_height="360dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            />
 
     </LinearLayout>
 </LinearLayout>

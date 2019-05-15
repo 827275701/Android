@@ -28,6 +28,8 @@ dependencies {
 
 dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+
+    compile 'com.github.huangyanbin:SmartTable:2.2.0'
 }
 
 android {

@@ -20,7 +20,7 @@ public class AdminMain extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.admin_main);
 
         admin_user = (Button) findViewById(R.id.Badmin_user);
         admin_room = (Button) findViewById(R.id.Badmin_room);
