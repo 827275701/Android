@@ -53,16 +53,41 @@ public class GHistory extends Activity {
         where = i.getStringExtra("where");
 
         setTitle();//设置标题  xx的室内xx情况
-        showChart(history_data_day);
-        showData_G();   //获取并显示数据
 
+        int count = 1;
+        while (count>0){
+            //showChart(history_data_day);
+            showData_G();   //获取并显示数据
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            count--;
+        }
 
-        /***
-         * Handler分发Message对象的方式
-         */
-
-
+        //定时函数
+        //mHandler.postDelayed(r, 100);//延时100毫秒
     }
+
+    //一个定时器
+    Handler mHandler = new Handler();
+    Runnable r = new Runnable() {
+
+        @Override
+        public void run() {
+            //do something
+            //每隔1s循环执行run方法
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            lc.clear();
+            showData_G();   //获取并显示数据
+            //mHandler.postDelayed(this, 100);
+        }
+    };
 
     private void setXAxis() {
         // X轴
@@ -145,6 +170,29 @@ public class GHistory extends Activity {
 
     //从服务器获取有害气体浓度的数据，并显示到UI，制作图标
     private void showData_G() {
+        final Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                System.out.println("msg===>" + msg.obj.toString());
+                String data = msg.obj.toString().split("[=]")[1];
+                System.out.println("data ===>" + data);
+
+                String[] buff = data.split("[&]");
+
+                //String[] buff = res_body.split("[&]");
+                //走到这里， Android已经拿到了历史数据，并把每一条都保存到了buff中
+                //接下来要保存到history_data_xxx中，使其绘制成图表，并显示
+                for(int i = 0; i<buff.length; ++i) {
+                    history_data_day[i] = Float.parseFloat(buff[i]);
+                }
+
+                for(int i = 0; i<history_data_day.length; ++i) {
+                    System.out.println(history_data_day[i]);
+                }
+                showChart(history_data_day);  //显示LineChart
+            }
+        };
 
         new Thread(new Runnable() {
             @Override
@@ -154,7 +202,7 @@ public class GHistory extends Activity {
                     //设置POST请求的body
                     String postBody = "username=" + username + "&where=" + where + "&data=G";
                     MyHttp myHttp = new MyHttp();
-                    Response response = myHttp.connect("history", postBody);
+                    Response response = myHttp.connect("history_day", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
                         String res_body = response.body().string();
                         System.out.println("==== GHistory start ====");
@@ -163,30 +211,18 @@ public class GHistory extends Activity {
                         System.out.println("where--->" + where);
                         System.out.println(res_body);
 
-                        String data = res_body.split("[=]")[1];
-                        System.out.println("data ===>" + data);
+                        Message msg = new Message();
+                        msg.obj = res_body;
+                        handler.sendMessage(msg);
 
-                        String[] buff = data.split("[&]");
-
-                        //String[] buff = res_body.split("[&]");
-                        //走到这里， Android已经拿到了历史数据，并把每一条都保存到了buff中
-                        //接下来要保存到history_data_xxx中，使其绘制成图表，并显示
-                        for(int i = 0; i<buff.length; ++i) {
-                            history_data_day[i] = Float.parseFloat(buff[i]);
-                        }
-
-                        for(int i = 0; i<history_data_day.length; ++i) {
-                            System.out.println(history_data_day[i]);
-                        }
-
-                        //启动UI线程
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //要显示的数据已经保存到了 history_data_xxx中，接下来更新UI
-                                showChart(history_data_day);  //显示LineChart
-                            }
-                        });
+//                        //启动UI线程
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                //要显示的数据已经保存到了 history_data_xxx中，接下来更新UI
+//                                showChart(history_data_day);  //显示LineChart
+//                            }
+//                        });
 
                         System.out.println("==== GHistory end ====");
                     } else {

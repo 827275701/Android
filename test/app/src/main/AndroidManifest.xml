@@ -33,6 +33,12 @@
         <activity android:name=".ChangePassword">  </activity>
         <activity android:name=".AdminDeleteUser"> </activity>
         <activity android:name=".AdminSelectUser"> </activity>
+        <activity android:name=".TestChooseSpot">  </activity>
+        <activity android:name=".AdminChangeOtherPassword">  </activity>
+        <activity android:name=".AdminChangeOtherName">  </activity>
+        <activity android:name=".AdminChangeOtherNo">  </activity>
+        <activity android:name=".AdminChangeOtherSex">  </activity>
+        <activity android:name=".AdminChangeOtherInfo">  </activity>
 
 
     </application>

@@ -16,35 +16,103 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="35sp" />
+        android:layout_height="25sp" />
 
     <Button
         android:id="@+id/Badmin_add_user"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="添加管理员"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shap"
+        android:textColor="@android:color/white"/>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="35sp" />
+        android:layout_height="25sp" />
 
     <Button
         android:id="@+id/Badmin_delete_user"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="删除管理员"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shap"
+        android:textColor="@android:color/white"/>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="35sp" />
+        android:layout_height="25sp" />
 
     <Button
         android:id="@+id/Badmin_select_user"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="查询管理员"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shap"
+        android:textColor="@android:color/white"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25sp" />
+
+    <Button
+    android:id="@+id/Badmin_change_other_info"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:text="修改用户信息"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/button_shap"
+    android:textColor="@android:color/white"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/Badmin_change_other_passeord"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="修改其他管理员密码"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:background="@drawable/button_shap"-->
+        <!--android:textColor="@android:color/white"/>-->
+
+    <!--<Space-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25sp" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/Badmin_change_other_name"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="修改其他管理员姓名"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:background="@drawable/button_shap"-->
+        <!--android:textColor="@android:color/white"/>-->
+
+
+    <!--<Space-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25sp" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/Badmin_change_other_no"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="修改其他管理员工号"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:background="@drawable/button_shap"-->
+        <!--android:textColor="@android:color/white"/>-->
+
+    <!--<Space-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="25sp" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/Badmin_change_other_sex"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="修改其他管理员性别"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:background="@drawable/button_shap"-->
+        <!--android:textColor="@android:color/white"/>-->
 
 </LinearLayout>

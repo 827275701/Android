@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                                         MainActivity.this.startActivity(Ilogin); //启动意图
                                         MainActivity.this.finish();  //关闭MainActivity
                                     } else {
+                                        //Ilogin.setClass(MainActivity.this, ChooseSpot.class);
                                         Ilogin.setClass(MainActivity.this, ChooseSpot.class);
                                         Ilogin.putExtra("username", username);
                                         MainActivity.this.startActivity(Ilogin); //启动意图

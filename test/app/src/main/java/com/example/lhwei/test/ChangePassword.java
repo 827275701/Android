@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -127,11 +128,35 @@ public class ChangePassword extends Activity{
 
                     }
                 }).start();
-            } else {
-                Toast t = Toast.makeText(getApplicationContext(), "两次密码不相同！", Toast.LENGTH_SHORT);
-                t.show();
             }
 
+        }
+    }
+
+    //退出时的时间
+    private long mExitTime;
+    //对返回键进行监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+
+            exit();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    public void exit() {
+        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            //创建有一个 Intent对象，并指定启动程序Iret
+            Intent Iret = new Intent();  //创建意图
+            Iret.setClass(ChangePassword.this, ChooseSpot.class);
+            Iret.putExtra("username", username);
+            ChangePassword.this.startActivity(Iret);//启动意图
+            ChangePassword.this.finish(); //关闭当前Activity
+        } else {
+            finish();
+            System.exit(0);
         }
     }
 }

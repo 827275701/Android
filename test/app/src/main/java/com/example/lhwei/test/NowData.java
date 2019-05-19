@@ -5,6 +5,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Looper;
 import android.support.v7.app.NotificationCompat;
@@ -132,22 +133,6 @@ public class NowData extends Activity {
         }
     }
 
-    //对返回键进行监听
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            //返回到NowData Activity
-            Intent Iret = new Intent();
-            Iret.setClass(NowData.this,ChooseSpot.class);
-            Iret.putExtra("username", username);
-            NowData.this.startActivity(Iret);
-            NowData.this.finish();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
     private void showData() {
         new Thread(new Runnable() {
             @Override
@@ -169,9 +154,30 @@ public class NowData extends Activity {
                             public void run() {
                                 //更新UI
                                 String[] buff = res_body.split("[&]");
-                                now_t.setText(buff[0].split("[=]")[1]);
-                                now_h.setText(buff[1].split("[=]")[1]);
-                                now_g.setText(buff[2].split("[=]")[1]);
+                                String t = buff[0].split("[=]")[1];
+                                String h = buff[1].split("[=]")[1];
+                                String g = buff[2].split("[=]")[1];
+
+                                if(new CheckOut().check_now_t(Float.parseFloat(t))) {
+                                    now_t.setTextColor(Color.GREEN);  //设置为绿色
+                                } else{
+                                    now_t.setTextColor(Color.RED);
+                                }
+
+                                if(new CheckOut().check_now_h(Float.parseFloat(h))) {
+                                    now_h.setTextColor(Color.GREEN);
+                                } else{
+                                    now_h.setTextColor(Color.RED);
+                                }
+
+                                if(new CheckOut().check_now_g(Float.parseFloat(g))) {
+                                    now_g.setTextColor(Color.GREEN);
+                                } else{
+                                    now_g.setTextColor(Color.RED);
+                                }
+                                now_t.setText(t);
+                                now_h.setText(h);
+                                now_g.setText(g);
                             }
 
                         });
@@ -189,4 +195,21 @@ public class NowData extends Activity {
             }
         }).start();
     }
+
+    //对返回键进行监听
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            //返回到NowData Activity
+            Intent Iret = new Intent();
+            Iret.setClass(NowData.this,ChooseSpot.class);
+            Iret.putExtra("username", username);
+            NowData.this.startActivity(Iret);
+            NowData.this.finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }

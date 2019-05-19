@@ -5,21 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Response;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lhwei on 2019/1/17.
@@ -28,14 +26,17 @@ public class TestChooseSpot extends Activity {
     //左边拓展框内容
     Button exitLogin;   //退出登录
     Button personInfo;  //个人信息
-    Button chang_epassword;
+    Button chang_epassword; //修改密码
+    TextView tv_name;  //姓名
+    TextView tv_no;  //工号
+    Spinner Srooms;
 
     String username = null; //登录账号
     String where = null;  //
+    String[] rooms = null;
 
-    TextView tv_name;  //姓名
-    TextView tv_no;  //座右铭
-
+    private List<String> data_list;
+    private ArrayAdapter<String> arr_adapter;
 
 
     // 主线程Handler
@@ -49,9 +50,9 @@ public class TestChooseSpot extends Activity {
         exitLogin = (Button)findViewById(R.id.Bexit_login);
         personInfo = (Button)findViewById(R.id.Bperson_info);
         chang_epassword = (Button)findViewById(R.id.Bchange_password);
-
         tv_name = (TextView)findViewById(R.id.Tname);
         tv_no = (TextView)findViewById(R.id.Tno);
+        Srooms = (Spinner) findViewById(R.id.Schooser_spot);
 
         exitLogin.setOnClickListener(new ButtonClickListener_ExitLogin());   //退出按键监听
         personInfo.setOnClickListener(new ButtonClickListener_PersonInfo());   //个人信息按键监听
@@ -61,10 +62,18 @@ public class TestChooseSpot extends Activity {
         Intent  i = this.getIntent();
         username = i.getStringExtra("username");
 
-        //getPersonInfo();
+        getPersonInfo();
 
+        get_room();
+        System.out.println("博览室 rooms---》" + rooms[0]);
+
+
+        set_room();
 
     }
+
+
+
 
     //个人信息按钮监听函数
     class ButtonClickListener_PersonInfo implements View.OnClickListener {
@@ -90,7 +99,7 @@ public class TestChooseSpot extends Activity {
     }
 
     private void getPersonInfo() {
-        //发送HTTP请求去服务其数据库获取用户信息
+        //发送HTTP请求去服务其数据库获取用户的姓名和工号，并显示到对应的TextView
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -101,7 +110,8 @@ public class TestChooseSpot extends Activity {
                     Response response = myHttp.connect("choose_spot", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
                         final String res_body = response.body().string();
-                        System.out.println("==== chooseSpot start ====");
+
+                        System.out.println("==== ChooseSpot start ====");
                         System.out.println("username--->" + username);
                         System.out.println(res_body);
 
@@ -113,10 +123,9 @@ public class TestChooseSpot extends Activity {
                                 tv_name.setText(buff[0].split("[=]")[1]);
                                 tv_no.setText(buff[1].split("[=]")[1]);
                             }
-
                         });
+                        System.out.println("==== ChooseSpot end ====");
 
-                        System.out.println("==== chooseSpot end ====");
                     } else {
                         Looper.prepare();
                         Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
@@ -128,6 +137,57 @@ public class TestChooseSpot extends Activity {
                 }
             }
         }).start();
+    }
+
+    private void get_room() {
+//发送HTTP请求去服务其数据库获取用户的姓名和工号，并显示到对应的TextView
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //设置POST请求的body
+                    String postBody = "username=" + username;
+                    MyHttp myHttp = new MyHttp();
+                    Response response = myHttp.connect("get_room", postBody);
+                    if (response.isSuccessful()) {  //如果返回200 OK
+                        final String res_body = response.body().string();
+
+                        System.out.println("==== Get room start ====");
+                        System.out.println("username--->" + username);
+                        System.out.println(res_body);
+
+                        String[] buff = res_body.split("[&]");
+
+                        //使用
+
+                        System.out.println("==== Get room end ====");
+
+                    } else {
+                        Looper.prepare();
+                        Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
+                        t.show();
+                        Looper.loop();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void set_room() {
+        data_list = new ArrayList<String>();
+        data_list.add("北京");
+        data_list.add("上海");
+        data_list.add("广州");
+        data_list.add("深圳");
+
+        //适配器
+        arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
+        //设置样式
+        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //加载适配器
+        Srooms.setAdapter(arr_adapter);
     }
 
     //对返回键进行监听，两次返回键之间小于2秒，程序退出

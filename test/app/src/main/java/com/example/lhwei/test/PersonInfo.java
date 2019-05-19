@@ -28,20 +28,9 @@ public class PersonInfo extends Activity {
     TextView Tname;
     TextView Tjob_number;
     TextView Tsex;
-    TextView Tage;
-    TextView Thiredate;
-    TextView Tbirthday;
     TextView Tphone;
 
     String username = null;
-
-    String name = null;    //姓名
-    String job_number = null;   //工号
-    String sex = null;   //性别
-    String age = null;   //年龄
-    String hiredate = null;  //入职时间
-    String birthday = null; //生日
-    String phone = null; //座右铭
 
     // 主线程Handler
     // 用于将从服务器获取的消息显示出来
@@ -52,19 +41,14 @@ public class PersonInfo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.person_info);
 
-
         //从mainActivity的意图中获取登录的账号
         Intent  i = this.getIntent();
         username = i.getStringExtra("username");
         System.out.println("personInfo username--------------" + username);
 
-        //ret = (Button)findViewById(R.id.Bperson_info_ret);
         Tname = (TextView)findViewById(R.id.Tinfo_name);
         Tjob_number = (TextView)findViewById(R.id.Tinfo_job_number);
         Tsex = (TextView)findViewById(R.id.Tinfo_sex);
-        //Tage = (TextView)findViewById(R.id.Tinfo_age);
-        //Thiredate = (TextView)findViewById(R.id.Tinfo_hiredate);
-        //Tbirthday = (TextView)findViewById(R.id.Tinfo_birthday);
         Tphone = (TextView)findViewById(R.id.Tphone);
 
         get_person_info();

@@ -56,7 +56,7 @@
                 android:maxLength="20"
                 android:paddingLeft="55dp"
                 android:textColor="#e9e9e9"
-                android:text="123456"
+                android:text="admin"
                 android:inputType="textMultiLine" />
 
 
@@ -97,7 +97,7 @@
                 android:paddingRight="60dp"
                 android:layout_gravity="left|bottom"
                 android:textColor="#eeebeb"
-                android:text="123"/>
+                android:text="123456"/>
 
         </FrameLayout>
 
