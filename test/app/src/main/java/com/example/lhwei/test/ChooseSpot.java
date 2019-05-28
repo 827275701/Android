@@ -31,7 +31,7 @@ public class ChooseSpot extends Activity {
     //左边拓展框内容
     Button exitLogin;   //退出登录
     Button personInfo;  //个人信息
-    Button chang_epassword;
+    Button chang_epassword;    //修改密码
 
     String username = null; //登录账号
     String where = null;  //

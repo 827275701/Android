@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Response;
@@ -20,7 +23,8 @@ import java.io.IOException;
 public class AdminChangeOtherInfo extends Activity {
     EditText Ename;
     EditText Eno;
-    EditText Esex;
+    //EditText Esex;
+    Spinner Ssex;
     EditText Ephone;
     EditText Epwd;
 
@@ -47,13 +51,30 @@ public class AdminChangeOtherInfo extends Activity {
 
         Ename = (EditText) findViewById(R.id.Tadmin_change_other_info_name);
         Eno = (EditText) findViewById(R.id.Tadmin_change_other_info_no);
-        Esex = (EditText) findViewById(R.id.Tadmin_change_other_info_sex);
+        Ssex = (Spinner) findViewById(R.id.Sadmin_change_other_info_sex);
         Ephone = (EditText) findViewById(R.id.Tadmin_change_other_info_phone);
         Epwd = (EditText) findViewById(R.id.Tadmin_change_other_info_password);
 
         submit = (Button) findViewById(R.id.Badmin_change_other_info_submit);
         select = (Button) findViewById(R.id.Badmin_change_other_info_select_user_info);
 
+
+        Ssex.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+
+                //拿到被选择项的值
+                n_sex = (String)Ssex.getSelectedItem();
+//                //把该值传给 TextView
+//                tv.setText(str);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+            }
+        });
 
         submit.setOnClickListener(new ButtonClickListener_submit());   //用户管理按键监听
         select.setOnClickListener(new ButtonClickListener_select());
@@ -69,14 +90,14 @@ public class AdminChangeOtherInfo extends Activity {
             }
             n_name = Ename.getText().toString();
             n_no = Eno.getText().toString();
-            n_sex = Esex.getText().toString();
+            //n_sex = Ssex.getItemAtPosition(0).toString();
             n_phone =  Ephone.getText().toString();
             n_pwd = Epwd.getText().toString();
 
             CheckOut checkOut = new CheckOut();
             if(checkOut.check_no(n_no) == false) {
                 //提示 工号格式错误
-                Toast t = Toast.makeText(getApplicationContext(), "工号不能修改", Toast.LENGTH_SHORT);
+                Toast t = Toast.makeText(getApplicationContext(), "工号格式错误", Toast.LENGTH_SHORT);
                 t.show();
                 return;
             }
@@ -115,8 +136,12 @@ public class AdminChangeOtherInfo extends Activity {
                 String postBody = "username=admin" + "&name=" + n_name +
                         "&no=" + n_no+ "&sex=" + n_sex +
                         "&phone=" + n_phone+"&password=" + n_pwd;
+
                 @Override
                 public void run() {
+                    System.out.println("n_on ====》" + n_no);
+                    System.out.println("o_on ====》" + o_no);
+
                     if(o_no.equals(n_no) == false) {
                         //显示 工号不能修改
                         Looper.prepare();
@@ -126,7 +151,9 @@ public class AdminChangeOtherInfo extends Activity {
                         return;
                     }
 
-                    if(o_name.equals(o_name) &&n_sex.equals(n_sex) &&n_phone.equals(n_phone) &&n_pwd.equals(n_pwd)) {
+                    System.out.println("n_sex ====》" + n_sex);
+                    System.out.println("o_sex ====》" + o_sex);
+                    if(o_name.equals(n_name) &&o_sex.equals(n_sex) &&o_phone.equals(n_phone) &&o_pwd.equals(n_pwd)) {
                         //显示 没有任何修改，并返回
                         Looper.prepare();
                         Toast t = Toast.makeText(getApplicationContext(), "没有任何修改", Toast.LENGTH_SHORT);
@@ -184,6 +211,30 @@ public class AdminChangeOtherInfo extends Activity {
         }
     }
 
+    public void initSpinner_m() {
+        //原始string数组
+        final String[] spinnerItems = {"男","女"};
+        //简单的string数组适配器：样式res，数组
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinnerItems);
+        //下拉的样式res
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //绑定 Adapter到控件
+        Ssex.setAdapter(spinnerAdapter);
+    }
+
+    public void initSpinner_w() {
+        //原始string数组
+        final String[] spinnerItems = {"女","男"};
+        //简单的string数组适配器：样式res，数组
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinnerItems);
+        //下拉的样式res
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //绑定 Adapter到控件
+        Ssex.setAdapter(spinnerAdapter);
+    }
+
     class ButtonClickListener_select implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -226,7 +277,6 @@ public class AdminChangeOtherInfo extends Activity {
 
                             System.out.println("==== Successful ====");
                                 //成功 返回好AdminUserManagement界面
-
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -234,12 +284,21 @@ public class AdminChangeOtherInfo extends Activity {
                                     String[] buff = res.split("[&]");
                                     o_name = buff[0].split("[=]")[1];
                                     o_no = buff[1].split("[=]")[1];
+                                    System.out.println("o_on ====》" + o_no);
+
+
                                     o_sex = buff[2].split("[=]")[1];
                                     o_phone = buff[3].split("[=]")[1];
                                     o_pwd = buff[4].split("[=]")[1];
-
                                     Ename.setText(o_name);
-                                    Esex.setText(o_sex);
+                                    if(o_sex.equals("男")) {
+                                        initSpinner_m();
+                                    }else if(o_sex.equals("女")) {
+                                        initSpinner_w();
+                                    } else {
+                                        //TODO
+                                        //未知性别
+                                    }
                                     Ephone.setText(o_phone);
                                     Epwd.setText(o_pwd);
                                 }
@@ -249,7 +308,7 @@ public class AdminChangeOtherInfo extends Activity {
                         } else {
                             //失败 提示失败信息，页面不跳转
                             Looper.prepare();
-                            Toast t = Toast.makeText(getApplicationContext(), "添加管理员失败", Toast.LENGTH_SHORT);
+                            Toast t = Toast.makeText(getApplicationContext(), "查询管理员失败", Toast.LENGTH_SHORT);
                             t.show();
                             Looper.loop();
                         }

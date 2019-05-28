@@ -27,110 +27,114 @@
         android:orientation="vertical"
         android:layout_gravity="center_horizontal">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="          姓  名"
+                android:text="姓 名："
                 android:textColor="#ffffff"
-                android:layout_gravity="left|center_vertical" />
+                android:layout_gravity="left|center_vertical"
+                android:gravity="right"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="null"
+                android:text=""
                 android:id="@+id/Tinfo_name"
                 android:textColor="#ffffff"
                 android:layout_gravity="center" />
 
-        </FrameLayout>
+        </LinearLayout>
         
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="          工  号"
-                android:textColor="#ffffff"/>
+                android:text="工 号："
+                android:textColor="#ffffff"
+                android:gravity="right"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="null"
+                android:text=""
                 android:id="@+id/Tinfo_job_number"
                 android:textColor="#ffffff"
                 android:layout_gravity="center" />
 
-        </FrameLayout>
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="          性  别"
-                android:textColor="#ffffff"/>
+                android:text="性 别："
+                android:textColor="#ffffff"
+                android:gravity="right"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="null"
+                android:text=""
                 android:id="@+id/Tinfo_sex"
                 android:textColor="#ffffff"
                 android:layout_gravity="center" />
 
-        </FrameLayout>
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="          手  机"
-                android:textColor="#ffffff"/>
+                android:text="手 机："
+                android:textColor="#ffffff"
+                android:gravity="right"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:text="null"
+                android:text=""
                 android:id="@+id/Tphone"
                 android:textColor="#ffffff"
                 android:layout_gravity="center" />
 
-        </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

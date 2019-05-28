@@ -228,7 +228,11 @@ public class THistory extends Activity {
 
             //返回到NowData Activity
             Intent Iret = new Intent();
-            Iret.setClass(THistory.this,NowData.class);
+            if(username.equals("admin")) {
+                Iret.setClass(THistory.this, AdminChooseSpot.class);
+            }else {
+                Iret.setClass(THistory.this,NowData.class);
+            }
             Iret.putExtra("username", username);
             Iret.putExtra("where", where);
             THistory.this.startActivity(Iret);

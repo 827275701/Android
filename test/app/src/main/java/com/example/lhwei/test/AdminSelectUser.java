@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import android.os.Looper;
 import android.view.KeyEvent;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +27,15 @@ import java.util.List;
 
 
 public class AdminSelectUser extends Activity {
-    TextView users;
+    //TextView users;
 
+    ListView Lusers;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_select_user);
-        users = (TextView) findViewById(R.id.Tselectuser_users);
+        //users = (TextView) findViewById(R.id.Tselectuser_users);
+
+        Lusers = (ListView) findViewById(R.id.Ladmin_select_user_users);
 
         get_users();  //查询的用户列表中不包括admin
     }
@@ -49,29 +54,38 @@ public class AdminSelectUser extends Activity {
                     System.out.println("==== Select Users start ====");
                     if (response.isSuccessful()) {  //如果返回200 OK
                         System.out.println(res_body);
-                        if(res_body.isEmpty()) {
+                        if(res_body.equals("Nobody")) {
                             //提示此时还没有用户
+                            Looper.prepare();
+                            Toast t = Toast.makeText(getApplicationContext(), "目前还没有任何用户", Toast.LENGTH_SHORT);
+                            t.show();
+                            Looper.loop();
                         } else {
+                            //取出用户信息保存到info的字符串数组
+                            String[] buff = res_body.split("[&]");
+
+                            int length = buff.length/3;
+                            final String[] users = new String[length];
+                            users[0] = "";
+                            int j = 0;
+                            for(int i = 1; i <= buff.length; ++i){
+                                String[] info;
+                                info = buff[i-1].split("[=]");
+                                users[j] = users[j] + "                " + info[1];
+                                if(i%3==0 && j<length-1) {
+                                    ++j;
+                                    users[j] = "";
+                                }
+                            }
+
+
                             //显示到UI上
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     //更新UI
-                                    String str = "111111\n";
-                                    for(int i = 0; i < 100; ++i) {
-                                        str += "111111\n";
-                                    }
-
-                                    users.setText(str);
-//                                    String[] buff = res_body.split("[&]");
-//                                    for(int i = 0; i < buff.length; ++i) {
-//                                        users.setText(buff[i]);
-//                                        if((i+1)%3 == 0) {
-//                                            users.setText("\n");
-//                                        } else  {
-//                                            users.setText("    ");
-//                                        }
-//                                    }
+                                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(AdminSelectUser.this,android.R.layout.simple_list_item_1,users);//listdata和str均可
+                                    Lusers.setAdapter(arrayAdapter);
                                 }
 
                             });
@@ -94,6 +108,66 @@ public class AdminSelectUser extends Activity {
             }
         }).start();
     }
+
+//    private void get_users(){
+//        new Thread(new Runnable() {
+//            //在android中，主线程用来显示界面，所以与网络通信只能在创建一个线程
+//            MyHttp myHttp = new MyHttp();
+//            String postBody = "username=admin";
+//            @Override
+//            public void run() {
+//                try {
+//                    Response response = myHttp.connect("select_user", postBody);
+//                    final String res_body = response.body().string();
+//
+//                    System.out.println("==== Select Users start ====");
+//                    if (response.isSuccessful()) {  //如果返回200 OK
+//                        System.out.println(res_body);
+//                        if(res_body.isEmpty()) {
+//                            //提示此时还没有用户
+//                        } else {
+//                            //显示到UI上
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    //更新UI
+//                                    String str = "111111\n";
+//                                    for(int i = 0; i < 100; ++i) {
+//                                        str += "111111\n";
+//                                    }
+//
+//                                    //users.setText(str);
+////                                    String[] buff = res_body.split("[&]");
+////                                    for(int i = 0; i < buff.length; ++i) {
+////                                        users.setText(buff[i]);
+////                                        if((i+1)%3 == 0) {
+////                                            users.setText("\n");
+////                                        } else  {
+////                                            users.setText("    ");
+////                                        }
+////                                    }
+//                                }
+//
+//                            });
+//                        }
+//                        System.out.println("==== Select Users end ====");
+//                    } else {
+//                        //失败 提示失败信息，页面不跳转
+//                        Looper.prepare();
+//                        Toast t = Toast.makeText(getApplicationContext(), "查询管理员失败", Toast.LENGTH_SHORT);
+//                        t.show();
+//                        Looper.loop();
+//                    }
+//                } catch (IOException e) {
+//                    Looper.prepare();
+//                    Toast t = Toast.makeText(getApplicationContext(), "服务器错误", Toast.LENGTH_SHORT);
+//                    t.show();
+//                    Looper.loop();
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
 
     //对返回键进行监听
     @Override

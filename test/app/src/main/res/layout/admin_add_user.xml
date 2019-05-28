@@ -76,10 +76,16 @@
             android:text="性    别"
             android:textSize="25dp"/>
 
-        <EditText
-            android:id="@+id/Tadmin_adduser_sex"
+        <!--<EditText-->
+            <!--android:id="@+id/Tadmin_adduser_sex"-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="45dp"/>-->
+
+        <Spinner
+            android:id="@+id/Sadmin_adduser_sex"
             android:layout_width="200dp"
             android:layout_height="45dp"/>
+
     </LinearLayout>
 
     <Space
@@ -118,7 +124,7 @@
         android:textSize="20dp"
         android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"
-        android:background="#ff336699"/>
+        android:background="@drawable/button_shap"/>
 
 
 

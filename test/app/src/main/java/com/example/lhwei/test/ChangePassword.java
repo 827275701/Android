@@ -133,30 +133,38 @@ public class ChangePassword extends Activity{
         }
     }
 
-    //退出时的时间
-    private long mExitTime;
     //对返回键进行监听
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 
-            exit();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-    public void exit() {
-        if ((System.currentTimeMillis() - mExitTime) > 2000) {
+            //exit();
             //创建有一个 Intent对象，并指定启动程序Iret
             Intent Iret = new Intent();  //创建意图
-            Iret.setClass(ChangePassword.this, ChooseSpot.class);
+            if(username.equals("admin")) {
+                Iret.setClass(ChangePassword.this, AdminMain.class);
+            }else {
+                Iret.setClass(ChangePassword.this, ChooseSpot.class);
+            }
             Iret.putExtra("username", username);
             ChangePassword.this.startActivity(Iret);//启动意图
             ChangePassword.this.finish(); //关闭当前Activity
-        } else {
-            finish();
-            System.exit(0);
+
         }
+        return super.onKeyDown(keyCode, event);
     }
+//    public void exit() {
+//        //创建有一个 Intent对象，并指定启动程序Iret
+//        Intent Iret = new Intent();  //创建意图
+//        if(username.equals("admin")) {
+//            Iret.setClass(ChangePassword.this, AdminMain.class);
+//        }else {
+//            Iret.setClass(ChangePassword.this, ChooseSpot.class);
+//        }
+//        Iret.putExtra("username", username);
+//        ChangePassword.this.startActivity(Iret);//启动意图
+//        ChangePassword.this.finish(); //关闭当前Activity
+//
+//    }
 }

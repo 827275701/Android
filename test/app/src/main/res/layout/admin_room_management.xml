@@ -19,32 +19,37 @@
         android:layout_height="35sp" />
 
     <Button
-        android:id="@+id/Badmin_add_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="添加博览室"
-        android:layout_gravity="center_horizontal" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="35sp" />
-
-    <Button
-        android:id="@+id/Badmin_delete_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="删除博览室"
-        android:layout_gravity="center_horizontal" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="35sp" />
-
-    <Button
-        android:id="@+id/Badmin_select_user"
-        android:layout_width="wrap_content"
+        android:id="@+id/Badmin_select_room"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="查询博览室"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shap"
+        android:textColor="@android:color/white"/>
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35sp" />
+
+    <Button
+        android:id="@+id/Badmin_choose_spot"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="查看博览室信息"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shap"
+        android:textColor="@android:color/white"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="35sp" />
+
+    <Button
+        android:id="@+id/Badmin_update_room_info"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="修改博览室信息"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/button_shap"
+        android:textColor="@android:color/white"/>
 </LinearLayout>

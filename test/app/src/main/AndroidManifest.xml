@@ -39,6 +39,9 @@
         <activity android:name=".AdminChangeOtherNo">  </activity>
         <activity android:name=".AdminChangeOtherSex">  </activity>
         <activity android:name=".AdminChangeOtherInfo">  </activity>
+        <activity android:name=".AdminChooseSpot">  </activity>
+        <activity android:name=".AdminUpdateRoomInfo">  </activity>
+        <activity android:name=".AdminSelectRoom">  </activity>
 
 
     </application>

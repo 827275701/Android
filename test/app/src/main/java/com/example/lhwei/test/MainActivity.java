@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {  //如果返回200 OK
                                 String res = response.body().string();
                                 System.out.println(res);
-                                if(res.equals("yes")) {   //如果返回body的内容是“yes”
+                                if(res.equals("Successful")) {   //如果返回body的内容是“yes”
                                     //if(true) {
                                     //登录成功
                                     Intent Ilogin = new Intent();   //创建有一个 Intent对象，并指定启动程序Login

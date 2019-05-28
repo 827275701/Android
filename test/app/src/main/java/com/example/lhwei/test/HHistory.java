@@ -226,7 +226,11 @@ public class HHistory extends Activity {
 
             //返回到NowData Activity
             Intent Iret = new Intent();
-            Iret.setClass(HHistory.this, NowData.class);
+            if(username.equals("admin")) {
+                Iret.setClass(HHistory.this, AdminChooseSpot.class);
+            }else {
+                Iret.setClass(HHistory.this, NowData.class);
+            }
             Iret.putExtra("where", where);
             Iret.putExtra("username", username);
             HHistory.this.startActivity(Iret);

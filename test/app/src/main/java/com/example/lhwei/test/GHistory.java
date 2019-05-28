@@ -258,7 +258,11 @@ public class GHistory extends Activity {
 
             //返回到NowData Activity
             Intent Iret = new Intent();
-            Iret.setClass(GHistory.this, NowData.class);
+            if(username.equals("admin")) {
+                Iret.setClass(GHistory.this, AdminChooseSpot.class);
+            }else {
+                Iret.setClass(GHistory.this, NowData.class);
+            }
             Iret.putExtra("username", username);
             Iret.putExtra("where", where);
             GHistory.this.startActivity(Iret);

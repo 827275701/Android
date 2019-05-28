@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="用户列表"
+        android:text="博览室列表"
         android:gravity="center"
         android:textSize="35dp"/>
 
@@ -37,7 +37,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:singleLine="true"
-            android:text="姓名"
+            android:text="名称"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -54,7 +54,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:singleLine="true"
-            android:text="工号"
+            android:text="编号"
             android:textColor="#000000"
             android:textSize="15sp" />
 
@@ -71,7 +71,7 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dip"
             android:singleLine="true"
-            android:text="手机号"
+            android:text="位置"
             android:textColor="#000000"
             android:textSize="15sp" />
     </LinearLayout>
@@ -79,8 +79,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Ladmin_select_user_users"/>
-
+        android:id="@+id/Ladmin_select_room_rooms"/>
 
 
 </LinearLayout>

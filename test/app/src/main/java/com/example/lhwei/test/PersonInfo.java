@@ -111,17 +111,16 @@ public class PersonInfo extends Activity {
         return super.onKeyDown(keyCode, event);
     }
     public void exit() {
-        if ((System.currentTimeMillis() - mExitTime) > 2000) {
-            //创建有一个 Intent对象，并指定启动程序Iret
-            Intent Iret = new Intent();  //创建意图
+        //创建有一个 Intent对象，并指定启动程序Iret
+        Intent Iret = new Intent();  //创建意图
+        if(username.equals("admin")) {
+            Iret.setClass(PersonInfo.this, AdminMain.class);
+        }else {
             Iret.setClass(PersonInfo.this, ChooseSpot.class);
-            Iret.putExtra("username", username);
-            PersonInfo.this.startActivity(Iret);//启动意图
-            PersonInfo.this.finish(); //关闭当前Activity
-        } else {
-            finish();
-            System.exit(0);
         }
+        Iret.putExtra("username", username);
+        PersonInfo.this.startActivity(Iret);//启动意图
+        PersonInfo.this.finish(); //关闭当前Activity
     }
 
 }
