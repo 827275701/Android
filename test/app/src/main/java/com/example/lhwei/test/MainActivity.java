@@ -66,15 +66,21 @@ public class MainActivity extends AppCompatActivity {
                                 if(res.equals("Successful")) {   //如果返回body的内容是“yes”
                                     //if(true) {
                                     //登录成功
-                                    Intent Ilogin = new Intent();   //创建有一个 Intent对象，并指定启动程序Login
 
+//                                    Intent intent=new Intent(MainActivity.this, MyService.class);
+//                                    Bundle bundle=new Bundle();
+//                                    intent.putExtras(bundle);
+//                                    startService(intent);
+
+
+                                    Intent Ilogin = new Intent();   //创建有一个 Intent对象，并指定启动程序Login
                                     if(username.equals("admin")) {
                                         Ilogin.setClass(MainActivity.this, AdminMain.class);
                                         MainActivity.this.startActivity(Ilogin); //启动意图
                                         MainActivity.this.finish();  //关闭MainActivity
                                     } else {
                                         //Ilogin.setClass(MainActivity.this, ChooseSpot.class);
-                                        Ilogin.setClass(MainActivity.this, ChooseSpot.class);
+                                        Ilogin.setClass(MainActivity.this, ChooseSpot1.class);
                                         Ilogin.putExtra("username", username);
                                         MainActivity.this.startActivity(Ilogin); //启动意图
                                         MainActivity.this.finish();  //关闭MainActivity

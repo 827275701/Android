@@ -42,7 +42,7 @@ public class AdminUpdateRoomInfo extends Activity{
         Troom_description  = (EditText) findViewById(R.id.Tadmin_change_room_info_description);
         Bsubmit  = (Button) findViewById(R.id.Badmin_change_other_info_submit);
 
-        Troom_id.setText(room_id);
+        Troom_id.setText(room_name);
 
         get_the_room_info();
 
@@ -59,7 +59,7 @@ public class AdminUpdateRoomInfo extends Activity{
                     String postBody = "username=admin&room_id=" + room_id;
                     System.out.println(postBody);
                     MyHttp myHttp = new MyHttp();
-                    Response response = myHttp.connect("get_the_room_info", postBody);
+                    Response response = myHttp.connect("room_info", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
                         final String res = response.body().string();
                         if(res.equals("Failed")) {
@@ -79,17 +79,14 @@ public class AdminUpdateRoomInfo extends Activity{
                                 @Override
                                 public void run() {
                                     //更新UI
-                                    Troom_name.setText(buff[1].split("[=]")[1]);
+                                    Troom_name.setText(buff[0].split("[=]")[1]);
                                     Troom_pos.setText(buff[2].split("[=]")[1]);
-                                    Troom_description.setText(buff[3].split("[=]")[1]);
+                                    Troom_description.setText(buff[4].split("[=]")[1]);
                                 }
 
                             });
                         }
                     } else{
-
-
-
                         Looper.prepare();
                         Toast t = Toast.makeText(getApplicationContext(), "服务器错误!", Toast.LENGTH_SHORT);
                         t.show();
@@ -125,9 +122,11 @@ public class AdminUpdateRoomInfo extends Activity{
                                 "&pos=" + n_pos + "&description=" + n_des;
                         System.out.println(postBody);
                         MyHttp myHttp = new MyHttp();
-                        Response response = myHttp.connect("change_room_info", postBody);
+                        Response response = myHttp.connect("update_room", postBody);
                         if (response.isSuccessful()) {  //如果返回200 OK
                             String res = response.body().string();
+                            System.out.println("res_bodt =====>" + res);
+
                             if(res.equals("Successful")) {
                                 System.out.println("==== Successful ====");
                                 //修改成功，提示成功，返回AdminRoomManagement

@@ -94,14 +94,19 @@ public class ChangePassword extends Activity{
                             String postBody = "username=" + username +"&nowpassword=" + nowpwd+"&newpassword="+newpwd;
                             System.out.println(postBody);
                             MyHttp myHttp = new MyHttp();
-                            Response response = myHttp.connect("change_password", postBody);
+                            Response response = myHttp.connect("change_pwd", postBody);
+                            System.out.println("==== connect yes ====");
                             if (response.isSuccessful()) {  //如果返回200 OK
                                 String res = response.body().string();
                                 if(res.equals("Successful")) {
                                     //修改密码成功，返回ChooseSpot
                                     Intent Iret = new Intent();  //创建意图
                                     Iret.putExtra("username", username);
-                                    Iret.setClass(ChangePassword.this, ChooseSpot.class);
+                                    if(username.equals("admin")) {
+                                        Iret.setClass(ChangePassword.this, AdminMain.class);
+                                    }else {
+                                        Iret.setClass(ChangePassword.this, ChooseSpot1.class);
+                                    }
                                     ChangePassword.this.startActivity(Iret);//启动意图
                                     ChangePassword.this.finish(); //关闭当前Activity
                                 } else {
@@ -145,7 +150,7 @@ public class ChangePassword extends Activity{
             if(username.equals("admin")) {
                 Iret.setClass(ChangePassword.this, AdminMain.class);
             }else {
-                Iret.setClass(ChangePassword.this, ChooseSpot.class);
+                Iret.setClass(ChangePassword.this, ChooseSpot1.class);
             }
             Iret.putExtra("username", username);
             ChangePassword.this.startActivity(Iret);//启动意图

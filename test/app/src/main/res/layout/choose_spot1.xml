@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background6">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前室内状态"
+            android:textSize="40dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/Ttitle"
+            android:textColor="@android:color/white"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+
+        <Spinner
+            android:id="@+id/Schoose_spot_choose_room1"
+            android:layout_width="210dp"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/spinner_shap"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="38dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/wendu"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:textSize="30dp"
+                android:id="@+id/Tnow_t1"
+                android:text="无数据"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+
+            <requestFocus
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:text=""
+                android:textSize="15dp"
+                android:background="@drawable/button_background_history1"
+                android:id="@+id/Bt_history1"/>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="38dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/shidu"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:textSize="30dp"
+                android:id="@+id/Tnow_h1"
+                android:text="无数据"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textSize="15dp"
+                android:background="@drawable/button_background_history1"
+                android:id="@+id/Bh_history1"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="38dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:baselineAligned="false">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/kulou"
+                android:layout_marginLeft="8dp"
+                android:visibility="visible"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="4"
+                android:textSize="30dp"
+                android:id="@+id/Tnow_g1"
+                android:text="无数据"
+                android:gravity="center"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:textSize="15dp"
+                android:background="@drawable/button_background_history1"
+                android:id="@+id/Bg_history1"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <requestFocus
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <requestFocus
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <!-- 左侧滑动栏 -->
+    <RelativeLayout
+        android:id="@+id/main_left_drawer_layout"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/colorPrimary"
+        android:paddingTop="50dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="50dp"
+                android:text="null"
+                android:id="@+id/Tname"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:text="null"
+                android:id="@+id/Tno"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个人信息"
+                android:id="@+id/Bperson_info"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="修改密码"
+                android:id="@+id/Bchange_password"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出登录"
+                android:id="@+id/Bexit_login"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
+
+
+
+
+
+
+

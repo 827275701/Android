@@ -260,7 +260,7 @@ public class AdminChangeOtherInfo extends Activity {
                     String postBody = "username=admin&no=" + no;
 
                     try {
-                        Response response = myHttp.connect("get_person", postBody);
+                        Response response = myHttp.connect("obtain_person", postBody);
                         final String res = response.body().string();
                         System.out.println(res);
 

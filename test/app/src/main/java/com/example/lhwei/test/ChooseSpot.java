@@ -144,8 +144,8 @@ public class ChooseSpot extends Activity {
                             public void run() {
                                 //更新UI
                                 String[] buff = res_body.split("[&]");
-                                tv_name.setText(buff[0].split("[=]")[1]);
-                                tv_no.setText(buff[1].split("[=]")[1]);
+                                tv_name.setText(buff[1].split("[=]")[1]);
+                                tv_no.setText(buff[2].split("[=]")[1]);
                             }
 
                         });

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background6">
 
     <Space
         android:layout_width="match_parent"
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="博览室管理"
         android:textSize="35dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/white"/>
 
     <Space
         android:layout_width="match_parent"
@@ -44,12 +46,12 @@
         android:layout_width="match_parent"
         android:layout_height="35sp" />
 
-    <Button
-        android:id="@+id/Badmin_update_room_info"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="修改博览室信息"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_shap"
-        android:textColor="@android:color/white"/>
+    <!--<Button-->
+        <!--android:id="@+id/Badmin_update_room_info"-->
+        <!--android:layout_width="250dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="修改博览室信息"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:background="@drawable/button_shap"-->
+        <!--android:textColor="@android:color/white"/>-->
 </LinearLayout>

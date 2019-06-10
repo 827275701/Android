@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/welcome_bg">
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="70dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="基于安卓的博物馆监测系统APP程序设计"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:textColor="#5a5b54"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="作       者：路浩伟"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="指导老师：郭文强"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:gravity="center"/>
+</LinearLayout>

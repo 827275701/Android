@@ -33,6 +33,7 @@ import java.util.List;
  */
 public class HHistory extends Activity {
     String where;  //哪里？  大厅？   博览室？
+    String where_id;
     String username;
     LineChart lc;
 
@@ -51,6 +52,7 @@ public class HHistory extends Activity {
         Intent i = this.getIntent();//获取当前意图
         username = i.getStringExtra("username");
         where = i.getStringExtra("where");
+        where_id = i.getStringExtra("where_id");
 
         setTitle();//设置标题  xx的室内xx情况
 
@@ -177,7 +179,7 @@ public class HHistory extends Activity {
             public void run() {
                 try{
                     //设置POST请求的body
-                    String postBody = "username=" + username + "&where=" + where + "&data=H";
+                    String postBody = "username=" + username + "&where=" + where_id + "&data=H";
                     MyHttp myHttp = new MyHttp();
                     Response response = myHttp.connect("history_day", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
@@ -229,9 +231,11 @@ public class HHistory extends Activity {
             if(username.equals("admin")) {
                 Iret.setClass(HHistory.this, AdminChooseSpot.class);
             }else {
-                Iret.setClass(HHistory.this, NowData.class);
+                //Iret.setClass(HHistory.this, NowData.class);
+                Iret.setClass(HHistory.this,ChooseSpot1.class);
             }
             Iret.putExtra("where", where);
+            Iret.putExtra("where_id", where_id);
             Iret.putExtra("username", username);
             HHistory.this.startActivity(Iret);
             HHistory.this.finish();

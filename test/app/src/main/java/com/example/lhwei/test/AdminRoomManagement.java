@@ -21,11 +21,11 @@ public class AdminRoomManagement extends AppCompatActivity {
 
         Bchoose_spot = (Button) findViewById(R.id.Badmin_choose_spot);
         Bselect_rooms = (Button) findViewById(R.id.Badmin_select_room);
-        Bupdate_room_info = (Button) findViewById(R.id.Badmin_update_room_info);
+        //Bupdate_room_info = (Button) findViewById(R.id.Badmin_update_room_info);
 
         Bchoose_spot.setOnClickListener(new ButtonClickListener_Choose_spot());
         Bselect_rooms.setOnClickListener(new ButtonClickListener_Select_rooms());
-        Bupdate_room_info.setOnClickListener(new ButtonClickListener_Update_room_info());
+        //Bupdate_room_info.setOnClickListener(new ButtonClickListener_Update_room_info());
 
     }
 

@@ -25,8 +25,8 @@ public class MyHttp {
         * 参数：method：对应cgi程序
         *       parameter：传给cgi程序的参数
         */
-        String urlStr = "http://101.200.63.71:8000/android/" + method;  //服务器地址+端口号+访问程序
-        //String urlStr = "http://60.205.188.244:9999/" + method;  //服务器地址+端口号+访问程序
+        //String urlStr = "http://101.200.63.71:8000/android/" + method;  //服务器地址+端口号+访问程序
+        String urlStr = "http://60.205.188.244:9999/" + method;  //服务器地址+端口号+访问程序
 
         //设置请求的数据类型
         final MediaType MEDIA_TYPE_MARKDOWN

@@ -36,6 +36,7 @@ import java.util.List;
  */
 public class THistory extends Activity {
     String where;  //哪里？  大厅？   博览室？
+    String where_id;
     String username;
 
     LineChart lc;
@@ -55,6 +56,7 @@ public class THistory extends Activity {
         Intent i = this.getIntent();//获取当前意图
         username = i.getStringExtra("username");
         where = i.getStringExtra("where");
+        where_id = i.getStringExtra("where_id");
 
         setTitle();//设置标题  xx的室内xx情况
 
@@ -180,7 +182,7 @@ public class THistory extends Activity {
             public void run() {
                 try{
                     //设置POST请求的body
-                    String postBody = "username=" + username + "&where=" + where + "&data=T";
+                    String postBody = "username=" + username + "&where=" + where_id + "&data=T";
                     MyHttp myHttp = new MyHttp();
                     Response response = myHttp.connect("history_day", postBody);
                     if (response.isSuccessful()) {  //如果返回200 OK
@@ -231,7 +233,9 @@ public class THistory extends Activity {
             if(username.equals("admin")) {
                 Iret.setClass(THistory.this, AdminChooseSpot.class);
             }else {
-                Iret.setClass(THistory.this,NowData.class);
+                //Iret.setClass(THistory.this,NowData.class);
+                Iret.setClass(THistory.this,ChooseSpot1.class);
+
             }
             Iret.putExtra("username", username);
             Iret.putExtra("where", where);

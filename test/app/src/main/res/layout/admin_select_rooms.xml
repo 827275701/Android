@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background6">
 
     <Space
         android:layout_width="match_parent"
@@ -12,74 +13,75 @@
         android:layout_height="wrap_content"
         android:text="博览室列表"
         android:gravity="center"
-        android:textSize="35dp"/>
+        android:textSize="35dp"
+        android:textColor="@android:color/white"/>
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#000000"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="2dp"-->
+        <!--android:background="#ffffff"/>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
 
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:singleLine="true"
-            android:text="名称"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1.10"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="名称"-->
+            <!--android:textSize="15sp"-->
+            <!--android:textColor="@android:color/white"/>-->
 
-        <View
-            android:layout_width="1.5dp"
-            android:layout_height="match_parent"
-            android:background="#000000" />
+        <!--<View-->
+            <!--android:layout_width="1.5dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#ffffff" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:singleLine="true"
-            android:text="编号"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="0.89"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="编号"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="15sp" />-->
 
-        <View
-            android:layout_width="1.5dp"
-            android:layout_height="match_parent"
-            android:background="#000000" />
+        <!--<View-->
+            <!--android:layout_width="1.5dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="#ffffff" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dip"
-            android:singleLine="true"
-            android:text="位置"
-            android:textColor="#000000"
-            android:textSize="15sp" />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingBottom="10dp"-->
+            <!--android:paddingTop="10dip"-->
+            <!--android:singleLine="true"-->
+            <!--android:text="位置"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="15sp" />-->
+    <!--</LinearLayout>-->
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Ladmin_select_room_rooms"/>
+        android:id="@+id/Ladmin_select_room_rooms" />
 
 
 </LinearLayout>

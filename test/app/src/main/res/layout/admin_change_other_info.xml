@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background6">
 
 
     <Space
@@ -13,7 +14,8 @@
         android:layout_height="wrap_content"
         android:text="修改管理员信息"
         android:textSize="35dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/white"/>
 
     <Space
         android:layout_width="match_parent"
@@ -29,13 +31,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="工    号"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <EditText
             android:id="@+id/Tadmin_change_other_info_no"
             android:layout_width="150dp"
             android:layout_height="45dp"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:textColor="@android:color/white"/>
         
         <Button
             android:layout_width="50dp"
@@ -60,12 +64,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="姓    名"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <EditText
             android:id="@+id/Tadmin_change_other_info_name"
             android:layout_width="200dp"
-            android:layout_height="45dp" />
+            android:layout_height="45dp"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
     <Space
@@ -82,7 +88,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="性    别"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <!--<EditText-->
             <!--android:id="@+id/Tadmin_change_other_info_sex"-->
@@ -92,8 +99,11 @@
         <Spinner
         android:id="@+id/Sadmin_change_other_info_sex"
         android:layout_width="200dp"
-        android:layout_height="45dp"/>
+        android:layout_height="45dp"
+            android:textColor="@android:color/white"/>
+
     </LinearLayout>
+
 
     <Space
         android:layout_width="match_parent"
@@ -109,13 +119,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="手机号"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <EditText
             android:id="@+id/Tadmin_change_other_info_phone"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
     <Space
@@ -132,13 +144,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="密    码"
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:textColor="@android:color/white"/>
 
         <EditText
             android:id="@+id/Tadmin_change_other_info_password"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:textColor="@android:color/white"/>
     </LinearLayout>
 
     <Space

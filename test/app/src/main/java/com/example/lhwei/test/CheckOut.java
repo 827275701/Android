@@ -37,6 +37,9 @@ public class CheckOut {
     }
 
     public boolean check_phone(String phone) {
+		if(phone.length() != 11) {
+			return false;
+		}
         return Pattern.matches(REGEX_MOBILE, phone);
     }
 
@@ -72,23 +75,23 @@ public class CheckOut {
     }
 
     public boolean check_now_t(float t) {
-        if(true) {
+        if(t <= 100) {
             //TODO
             return true;
         }
         return false;
     }
 
-    public boolean check_now_h(float t) {
-        if(true) {
+    public boolean check_now_h(float h) {
+        if(h <= 100) {
             //TODO
             return true;
         }
         return false;
     }
 
-    public boolean check_now_g(float t) {
-        if(true) {
+    public boolean check_now_g(float g) {
+        if(g <= 100) {
             //TODO
             return true;
         }

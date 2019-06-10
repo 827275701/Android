@@ -2,16 +2,19 @@ package com.example.lhwei.test;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Response;
@@ -59,6 +62,7 @@ public class AdminSelectRoom extends Activity{
                 Iret.putExtra("room_id", room_id[position]);
                 AdminSelectRoom.this.startActivity(Iret);
                 AdminSelectRoom.this.finish();
+
             }
         });
     }
@@ -76,8 +80,8 @@ public class AdminSelectRoom extends Activity{
 
         int index = 0;
         for(int i = 0; i < room_info.length; i+=3) {
-            room_id[index] = room_info[i].split("[=]")[1];
-            room_name[index] = room_info[i + 1].split("[=]")[1];
+            room_id[index] = room_info[i + 1].split("[=]")[1];
+            room_name[index] = room_info[i].split("[=]")[1];
             ++index;
         }
 

@@ -116,7 +116,7 @@ public class PersonInfo extends Activity {
         if(username.equals("admin")) {
             Iret.setClass(PersonInfo.this, AdminMain.class);
         }else {
-            Iret.setClass(PersonInfo.this, ChooseSpot.class);
+            Iret.setClass(PersonInfo.this, ChooseSpot1.class);
         }
         Iret.putExtra("username", username);
         PersonInfo.this.startActivity(Iret);//启动意图
