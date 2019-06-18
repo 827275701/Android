@@ -168,15 +168,15 @@
     <!-- 左侧滑动栏 -->
     <RelativeLayout
         android:id="@+id/main_left_drawer_layout"
-        android:layout_width="240dp"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/colorPrimary"
+        android:background="#88111111"
         android:paddingTop="50dp">
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="center_horizontal">
@@ -186,32 +186,52 @@
                 android:layout_height="wrap_content"
                 android:textSize="50dp"
                 android:text="null"
-                android:id="@+id/Tname"/>
+                android:id="@+id/Tname"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15dp"
                 android:text="null"
+                android:textColor="@android:color/white"
                 android:id="@+id/Tno"/>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="个人信息"
-                android:id="@+id/Bperson_info"/>
-
+                android:id="@+id/Bperson_info"
+                android:background="@drawable/button_shap"
+                android:textColor="@android:color/white"/>
+            
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="修改密码"
-                android:id="@+id/Bchange_password"/>
+                android:id="@+id/Bchange_password"
+                android:background="@drawable/button_shap"
+                android:textColor="@android:color/white"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
 
             <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="退出登录"
-                android:id="@+id/Bexit_login"/>
+                android:id="@+id/Bexit_login"
+                android:background="@drawable/button_shap"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
 

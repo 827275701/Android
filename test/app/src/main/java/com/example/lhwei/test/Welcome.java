@@ -18,10 +18,10 @@ public class Welcome extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
-        Intent intent=new Intent(Welcome.this, MyService.class);
-        Bundle bundle=new Bundle();
-        intent.putExtras(bundle);
-        startService(intent);
+//        Intent intent=new Intent(Welcome.this, MyService.class);
+//        Bundle bundle=new Bundle();
+//        intent.putExtras(bundle);
+//        startService(intent);
 
         handler.sendEmptyMessageDelayed(0, 3000);
     }

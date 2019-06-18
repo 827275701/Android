@@ -39,7 +39,7 @@ public class PersonInfo extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.person_info);
+            setContentView(R.layout.person_info);
 
         //从mainActivity的意图中获取登录的账号
         Intent  i = this.getIntent();

@@ -71,6 +71,12 @@ public class THistory extends Activity {
             }
             count--;
         }
+
+
+        Intent intent=new Intent(THistory.this, MyService.class);
+        Bundle bundle=new Bundle();
+        intent.putExtras(bundle);
+        startService(intent);
     }
 
     private void setXAxis() {

@@ -38,7 +38,8 @@
             android:id="@+id/Tadmin_adduser_name"
             android:layout_width="200dp"
             android:layout_height="45dp"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:text="路浩伟"/>
     </LinearLayout>
 
     <Space
@@ -63,7 +64,8 @@
             android:layout_width="200dp"
             android:layout_height="45dp"
             android:inputType="number"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:text="112233"/>
     </LinearLayout>
 
     <Space
@@ -118,7 +120,8 @@
             android:layout_width="200dp"
             android:layout_height="45dp"
             android:textColor="@android:color/white"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:text="18165151223"/>
     </LinearLayout>
 
 

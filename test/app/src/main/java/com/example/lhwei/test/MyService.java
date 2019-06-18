@@ -61,11 +61,11 @@ public class MyService extends Service{
 
             getData();
 
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                Thread.sleep(5000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
 
             mHandler.postDelayed(r, 5000);//延时1000毫秒
         }

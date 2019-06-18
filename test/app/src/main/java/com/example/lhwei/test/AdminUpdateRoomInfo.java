@@ -42,7 +42,7 @@ public class AdminUpdateRoomInfo extends Activity{
         Troom_description  = (EditText) findViewById(R.id.Tadmin_change_room_info_description);
         Bsubmit  = (Button) findViewById(R.id.Badmin_change_other_info_submit);
 
-        Troom_id.setText(room_name);
+        Troom_id.setText(room_id);
 
         get_the_room_info();
 
@@ -106,7 +106,7 @@ public class AdminUpdateRoomInfo extends Activity{
 
     }
 
-    class ButtonClickListener implements View.OnClickListener {    //登录按钮监听函数
+    class ButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             final String n_name = Troom_name.getText().toString();
