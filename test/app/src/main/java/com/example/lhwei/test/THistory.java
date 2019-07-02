@@ -179,6 +179,7 @@ public class THistory extends Activity {
                 for(int i = 0; i<history_data_day.length; ++i) {
                     System.out.println(history_data_day[i]);
                 }
+
                 showChart(history_data_day);  //显示LineChart
             }
         };

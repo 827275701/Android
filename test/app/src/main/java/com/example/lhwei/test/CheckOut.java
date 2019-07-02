@@ -75,7 +75,7 @@ public class CheckOut {
     }
 
     public boolean check_now_t(float t) {
-        if(t <= 100) {
+        if(t <= 40) {
             //TODO
             return true;
         }
@@ -83,7 +83,7 @@ public class CheckOut {
     }
 
     public boolean check_now_h(float h) {
-        if(h <= 100) {
+        if(h <= 50) {
             //TODO
             return true;
         }
@@ -91,7 +91,7 @@ public class CheckOut {
     }
 
     public boolean check_now_g(float g) {
-        if(g <= 100) {
+        if(g <= 50) {
             //TODO
             return true;
         }

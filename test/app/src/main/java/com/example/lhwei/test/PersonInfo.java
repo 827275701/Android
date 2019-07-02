@@ -70,6 +70,8 @@ public class PersonInfo extends Activity {
                         System.out.println("username--->" + username);
                         System.out.println(res_body);
 
+                        //res_body = name=xxxx&no=xxxx&sex=.....
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

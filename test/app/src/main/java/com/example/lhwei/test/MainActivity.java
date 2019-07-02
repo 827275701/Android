@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             if (check_uaername_password(username, password)){
                 new Thread(new Runnable() {
                     //在android中，主线程用来显示界面，所以与网络通信只能在创建一个线程
+
                     @Override
                     public void run() {
                         try {
